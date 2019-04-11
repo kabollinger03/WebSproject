@@ -240,11 +240,4 @@ public class PDF {
 				+ ", conURL=" + conURL + ", conUSER=" + conUSER + ", conPW=" + conPW + ", filePath=" + filePath + "]";
 	}
 
-	
-	
-	
-	
-	
-	
-	
 }
