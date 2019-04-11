@@ -1,7 +1,6 @@
 package Controller;
 //You will need apache pdfbox, apache fontbox, apache commonsloggings, jdbc JARs
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
@@ -12,22 +11,32 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-
 public class PDF {
     
-	private PDDocument document = new PDDocument();
+    private static DataSource dataSource;
+
+    private PDDocument document = new PDDocument();
 	private PDFont font = PDType1Font.TIMES_ROMAN;
 	private PDPage page = new PDPage();
-	private ResultSet rs;
-	private Connection con;
-	private final String conURL; //URL for connecting to DB
-	private String conUSER;//Username for connecting to DB
-	private String conPW;//Password for connecting to DB
-	private String filePath;//Path to save the pdf
-    private static DataSource dataSource;
-    private NamedParameterJdbcTemplate njdbc;
     private PDFinfo pdfinfo;
 
+	private String filePath = "C:/Users/syntel/Music/";//Path to save the pdf
+
+    private NamedParameterJdbcTemplate njdbc;
+    
+    public PDF(){}
+    
+	public PDF(DataSource dataSource) {
+        //super();
+        System.out.println("Constructor Called");
+        PDF.dataSource=dataSource;
+	}
+
+    @Override
+    public String toString() {
+        return "PDF{" + "document=" + document + ", font=" + font + ", page=" + page + ", pdfinfo=" + pdfinfo + ", filePath=" + filePath + ", njdbc=" + njdbc + '}';
+    }
+    
     public void setPdfinfo(PDFinfo pdfinfo) {
         this.pdfinfo = pdfinfo;
     }
@@ -35,28 +44,7 @@ public class PDF {
     public PDFinfo getPdfinfo() {
         return pdfinfo;
     }
-       
-        private Connection connection;
 	
-	public PDF(DataSource dataSource) {
-        super();
-        System.out.println("Constructor Called");
-        this.dataSource=dataSource;
-
-
-            //this.connection = connection; // only this matters
-
-            conURL = null;
-            conUSER = null;
-            /*
-            try{
-            generate("ab");
-            }catch(Exception e){
-                System.out.println("ERROR");
-            }
-*/
-	}
-
     public DataSource getDataSource() {
         return dataSource;
     }
@@ -65,27 +53,46 @@ public class PDF {
         return njdbc;
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
-
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        PDF.dataSource = dataSource;
     }
 
     public void setNjdbc(NamedParameterJdbcTemplate njdbc) {
         this.njdbc = njdbc;
     }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-        public PDF(){
-            conURL = null;
-            conUSER = null;
-             
-        }
-	
+    public PDDocument getDocument() {
+		return document;
+	}
+    
+	public void setDocument(PDDocument document) {
+		this.document = document;
+	}
+    
+	public PDFont getFont() {
+		return font;
+	}
+    
+	public void setFont(PDFont font) {
+		this.font = font;
+	}
+    
+	public PDPage getPage() {
+		return page;
+	}
+    
+	public void setPage(PDPage page) {
+		this.page = page;
+	}
+ 
+	public String getFilePath() {
+		return filePath;
+	}
+    
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+    
 	public void generate(String empid) throws Exception{ //empid not implemented yet, should be able to get everything you will need from it
 		System.out.println("Generating some stuff yo---------------------------------------------------------------------------------------------------");
         List<String> stream = new ArrayList();
@@ -166,7 +173,7 @@ public class PDF {
 		contentStream.endText();
 		contentStream.close();
         System.out.println("PDF Finished Writing");
-		document.save("C:/Users/syntel/Music/" + empid+".pdf"); //There is an issue here to work out
+		document.save(filePath + empid+".pdf"); //There is an issue here to work out
         System.out.println("PDF Saved");
 		document.close();
 		System.out.println("PDF Closed");
@@ -177,79 +184,5 @@ public class PDF {
         }
         //BarChartEx bc = new BarChartEx();
 	}
-	
-	public PDDocument getDocument() {
-		return document;
-	}
-    
-	public void setDocument(PDDocument document) {
-		this.document = document;
-	}
-    
-	public PDFont getFont() {
-		return font;
-	}
-    
-	public void setFont(PDFont font) {
-		this.font = font;
-	}
-    
-	public PDPage getPage() {
-		return page;
-	}
-    
-	public void setPage(PDPage page) {
-		this.page = page;
-	}
-    
-	public ResultSet getRs() {
-		return rs;
-	}
-    
-	public void setRs(ResultSet rs) {
-		this.rs = rs;
-	}
-    
-	public Connection getCon() {
-		return con;
-	}
-    
-	public void setCon(Connection con) {
-		this.con = con;
-	}
-    
-	public String getConUSER() {
-		return conUSER;
-	}
-    
-	public void setConUSER(String conUSER) {
-		this.conUSER = conUSER;
-	}
-    
-	public String getConPW() {
-		return conPW;
-	}
-    
-	public void setConPW(String conPW) {
-		this.conPW = conPW;
-	}
-    
-	public String getFilePath() {
-		return filePath;
-	}
-    
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-    
-	public String getConURL() {
-		return conURL;
-	}
-
-	@Override
-	public String toString() {
-		return "PDF [document=" + document + ", font=" + font + ", page=" + page + ", rs=" + rs + ", con=" + con
-				+ ", conURL=" + conURL + ", conUSER=" + conUSER + ", conPW=" + conPW + ", filePath=" + filePath + "]";
-	}
-
+		
 }
