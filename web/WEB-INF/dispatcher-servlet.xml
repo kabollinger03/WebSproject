@@ -38,6 +38,8 @@
                 <prop key="test.htm">adminController</prop>
                 <prop key="manage-module.htm">adminController</prop>
                 <prop key="courses.htm">adminController</prop>
+                
+                <prop key="download.htm">downloadTemplateController</prop>
             </props>
         </property>
     </bean>
@@ -79,5 +81,8 @@
           p:formView="CreateClass"
     />
     
+    <bean name="downloadTemplateController"
+        class="Controller.DownloadTemplateController"
+    />
 
 </beans>

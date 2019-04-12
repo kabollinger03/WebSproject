@@ -25,4 +25,8 @@
        <property name = "dataSource" ref = "dataSource" />
    </bean>
    
+    <bean id="moduleDAO" class="Controller.ModuleServiceDAO">
+        <property name="dataSource" ref="dataSource" /> <!-- refers to the datasource above -->
+    </bean>
+   
 </beans>
