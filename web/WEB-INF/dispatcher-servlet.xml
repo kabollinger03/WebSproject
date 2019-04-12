@@ -36,7 +36,7 @@
                 <!--all admin pages should use the adminController-->
                 <prop key="admin.htm">adminController</prop>
                 <prop key="test.htm">adminController</prop>
-                <prop key="manage-module.htm">adminController</prop>
+                
                 <prop key="courses.htm">adminController</prop>
                 <prop key="streams.htm">adminController</prop>
                 <prop key="modules.htm">adminController</prop>
@@ -54,8 +54,12 @@
                 <prop key="manage-course.htm">adminController</prop>
                 <prop key="create-courses.htm">adminController</prop>
                 <prop key="delete-courses.htm">adminController</prop>
-                <prop key="update-courses.htm">adminController</prop>  
+                <prop key="update-courses.htm">adminController</prop> 
                 
+                <prop key="manage-module.htm">adminController</prop>
+                <prop key="createModule.htm">adminController</prop>
+                <prop key="deleteModule.htm">adminController</prop>
+                <prop key="updateModule.htm">adminController</prop>
                 
                 <prop key="download.htm">downloadTemplateController</prop>
             </props>
