@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="admin.jsp">Admin <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="admin.htm">Admin <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="instructor.jsp">Instructor</a>
+          <a class="nav-link" href="instructor.htm">Instructor</a>
         </li>
       </ul>
       <ul class="navbar-nav d-md-none d-lg-block">

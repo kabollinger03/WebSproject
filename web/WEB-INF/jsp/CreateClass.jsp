@@ -161,9 +161,7 @@
                                                         ${stream.name}
                                                     </option>
                                                 </c:forEach>
-                                            </select>
-                                            <input type="submit" name="whatever" value="go"></input>
-                                            
+                                            </select>      
                                         </form>
                                     </td>
                                 </tr>

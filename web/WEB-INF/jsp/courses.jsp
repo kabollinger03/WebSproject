@@ -19,16 +19,16 @@
     <div class="container">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" href="admin.jsp">Users</a>
+          <a class="nav-link" href="admin.htm">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="streams.jsp">Streams</a>
+          <a class="nav-link" href="streams.htm">Streams</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="courses.jsp">Courses</a>
+          <a class="nav-link active" href="courses.htm">Courses</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="modules.jsp">Modules</a>
+          <a class="nav-link" href="modules.htm">Modules</a>
         </li>
       </ul>
     </div>

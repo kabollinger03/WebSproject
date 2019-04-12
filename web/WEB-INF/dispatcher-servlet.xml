@@ -38,6 +38,8 @@
                 <prop key="test.htm">adminController</prop>
                 <prop key="manage-module.htm">adminController</prop>
                 <prop key="courses.htm">adminController</prop>
+                <prop key="streams.htm">adminController</prop>
+                <prop key="modules.htm">adminController</prop>
                 
                 <prop key="download.htm">downloadTemplateController</prop>
             </props>

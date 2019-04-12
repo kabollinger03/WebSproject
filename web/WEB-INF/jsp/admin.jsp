@@ -22,7 +22,7 @@
           <a class="nav-link active" href="admin.htm">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="streams.jsp">Streams</a>
+          <a class="nav-link" href="streams.htm">Streams</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="courses.htm">Courses</a>
