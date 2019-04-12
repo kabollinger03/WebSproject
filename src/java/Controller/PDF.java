@@ -181,7 +181,7 @@ public class PDF {
         document.add(new VerticalSpacer(linspace));
         
         final OutputStream outputStream = new FileOutputStream(
-		filePath + empID + ".pdf");
+		filePath + empid + ".pdf");
         document.save(outputStream);
     
         //BarChartEx bc = new BarChartEx();
