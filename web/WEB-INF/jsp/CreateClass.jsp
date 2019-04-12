@@ -144,13 +144,13 @@
         
         <div class="container-fluid bg-white" style="height: 100vh;">
             <div class="container pb-5 pt-4">
-                <div class="row justify-content-center mx-1">
-                    <div class="col-12 px-3 py-3">
+                <div class="row mx-1">
+                    <div class="col-8 px-3 py-3">
                         <s:form commandName="excel">
                             <Table class="table">
                                 <tr class="my-2">
                                     
-                                <input type="hidden" name="streamID" id="streamID" value=""><
+                                <input type="hidden" name="streamID" id="streamID" value="">
                                     
                                     <td> Stream:</td> <!-- stream dropdown -->
                                     <td>
@@ -165,15 +165,6 @@
                                             <input type="submit" name="whatever" value="go"></input>
                                             
                                         </form>
-                                    </td>
-
-                                    <% String selectedStream = request.getParameter("selectedStream"); 
-                                        out.println(selectedStream);
-                                    %>
-                                    
-                                    <td><a href="DownloadTemplate.htm?streamID=" ${selectedStream}>
-                                            Download this stream's template
-                                        </a>
                                     </td>
                                 </tr>
                                 <tr class="my-2">
@@ -202,7 +193,13 @@
                                 <input type="submit" value="Submit" class="btn btn-success px-3"/>
                             </div>
                         </s:form>
-                    </div><!-- End col 12 -->
+                    </div><!-- End col 8 -->
+                    <div class="col-4 mt-4">
+                        Download template<br>
+                        <c:forEach items="${allStreams}" var="stream"> 
+                            <a href="download.htm?streamID=${stream.ID}">${stream.name}</a><br>
+                        </c:forEach>
+                    </div>
                 </div><!-- End row --> 
             </div><!-- End container --> 
         </div><!-- End fluid container -->
