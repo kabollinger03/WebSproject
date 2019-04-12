@@ -25,8 +25,11 @@ public class UploadAuthentication extends SimpleFormController{
     @Override
     protected ModelAndView onSubmit(Object command) throws Exception {
        
-       ExcelUploadObject excel =(ExcelUploadObject)command;
-       ExcelUpload(excel.getFile(), excel.getLocation(),excel.getSite(), excel.getStreamName());
+        ExcelUploadObject excel =(ExcelUploadObject)command;
+        ExcelUpload(excel.getFile(), excel.getLocation(),excel.getSite(), excel.getStreamName());
+        
+        // bring in all streams
+        
         
         return new ModelAndView("instructor");
     }

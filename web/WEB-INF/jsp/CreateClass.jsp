@@ -1,5 +1,65 @@
+<%@page import="POJO.Stream"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%> 
+
+<!--database access-->
+<%
+           
+   //initialize driver class
+    try {    
+      Class.forName("oracle.jdbc.driver.OracleDriver");
+    } catch (Exception e) {
+      out.println("Fail to initialize Oracle JDBC driver: " + e.toString() + "<P>");
+    }
+
+    String dbUser = "Student_Performance";
+    String dbPasswd = "Student_Performance";
+    String dbURL = "jdbc:oracle:thin:@localhost:1521:XE";
+
+    //connect
+    Connection conn = null;
+    try {
+      conn = DriverManager.getConnection(dbURL,dbUser,dbPasswd);
+      //out.println(" Connection status: " + conn + "<P>");
+    } catch(Exception e) {
+      out.println("Connection failed: " + e.toString() + "<P>");      
+    }
+    
+    String sql = "SELECT * FROM stream";
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery(sql);
+    
+    ArrayList<String> streamIDs = new ArrayList();
+    request.setAttribute("streamIDs", streamIDs);
+        
+    ArrayList<String> streamNames = new ArrayList();
+    request.setAttribute("streamNames", streamNames);
+    
+    ArrayList<Stream> allStreams = new ArrayList<Stream>();
+    while(rs.next()) {
+        allStreams.add(new Stream(rs));
+    }
+    request.setAttribute("allStreams", allStreams);
+    
+    // fill in names and IDs, two separate arrays
+//    while(rs.next()) {
+//        streamIDs.add(rs.getString("stream_id"));
+//        streamNames.add(rs.getString("stream_name"));
+//    }
+
+    rs.close(); // close resources
+    stmt.close();
+    conn.commit();
+    conn.close();
+%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -89,12 +149,16 @@
                         <s:form commandName="excel">
                             <Table class="table">
                                 <tr class="my-2">
-                                    <td> Stream:</td>
-                                    <td><select name="streamName" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="javaFSD">Java FSD</option>
-                                        <option value="bigData">Big Data</option>
-                                        <option value="netFSD">.Net FSD</option>
+                                    
+                                <input type="hidden" name="streamID" id="streamID" value=""><
+                                    
+                                    <td> Stream:</td> <!-- stream dropdown -->
+                                    <td><select name="streamSelect" class="form-control">
+                                            <c:forEach items="${allStreams}" var="stream">
+                                                <option value="${stream.ID}"> 
+                                                    ${stream.name}
+                                                </option>
+                                            </c:forEach>
                                         </select>
                                     </td>
 
