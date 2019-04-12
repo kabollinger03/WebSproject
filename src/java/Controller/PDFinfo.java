@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
-//import java.lang.String;
 import java.util.List;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -25,21 +24,6 @@ public class PDFinfo {
     }
 	
     public PDFinfo() {
-    }
-
-    /**
-    * Get employee ID of all employees
-    * @return ArrayList of all employee IDs
-    * @throws java.lang.Exception
-    */
-    public ArrayList<String> getAllIds() throws Exception{
-        ArrayList<String> list = new ArrayList();
-        Statement s1= c1.createStatement();
-        ResultSet r1=s1.executeQuery("select employee_id from employees");
-        while(r1.next()){
-            list.add(r1.getString(1));
-        }
-        return list;
     }
     
     public void setC1(Connection c1) {
@@ -66,14 +50,28 @@ public class PDFinfo {
         return dataSource;
     }
 	 
+    /**
+    * Get employee ID of all employees
+    * @return ArrayList of all employee IDs
+    * @throws java.lang.Exception
+    */
+    public ArrayList<String> getAllIds() throws Exception{
+        ArrayList<String> list = new ArrayList();
+        Statement s1= c1.createStatement();
+        ResultSet r1=s1.executeQuery("select employee_id from employees");
+        while(r1.next()){
+            list.add(r1.getString(1));
+        }
+        return list;
+    } 
+    
 	/**
     * Get employee name for a given Employee ID
-	* @param empID - the employeee id of the employee
+	* @param empID - the employee id of the employee
     * @return employee name
     * @throws java.lang.Exception
     */
     public String getEmployeeName(String empID) throws Exception{
-        System.out.println("Getting Employee Name");
         String SQL = "SELECT name FROM Employees WHERE employee_id = :id";
 
         SqlParameterSource namedParams= new MapSqlParameterSource("id",empID);
@@ -83,11 +81,11 @@ public class PDFinfo {
 	
 	/**
     * Get stream ID and name of streams employee has undertaken
-    * @param empID - the employeee id of the employee
+    * @param empID - the employee id of the employee
     * @return a list of strings, formatted as [id1, name1, id2, name2, ...]
     * @throws java.lang.Exception
     */
-    public List<String> getStreamIDName(String empID) throws Exception{
+    public ArrayList<String> getStreamIDName(String empID) throws Exception{
 		ArrayList<String> list = new ArrayList();
         Statement s1 = c1.createStatement();
 		ResultSet r1=s1.executeQuery("select s.stream_id, s.stream_name from Stream s, Class c, Employees e where s.stream_id=c.stream_id and c.class_id=e.class_id and e.employee_id='"+empID+"'");
@@ -104,8 +102,8 @@ public class PDFinfo {
 	
     /**
     * Get overall average score of an employee
-    * @param empID - the employeee id of the employee
-    * @return a string representaiton of the average score
+    * @param empID - the employee id of the employee
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public String getAverageScoresByEmployeeID(String empID) throws Exception{
@@ -119,7 +117,7 @@ public class PDFinfo {
     /**
     * Get average foundation score of an employee
     * @param empID - the employee id of the employee
-    * @return a string representaiton of the average score
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public String getAverageScoresByFoundationEmployeeID(String empID) throws Exception{
@@ -131,9 +129,9 @@ public class PDFinfo {
 	}
 	
     /**
-    * Get average specilization score of an employee
-    * @param empID - the employeee id of the employee
-    * @return a string representaiton of the average score
+    * Get average spec score of an employee
+    * @param empID - the employee id of the employee
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public String getAverageScoresBySpecializationEmployeeID(String empID) throws Exception{
@@ -146,8 +144,8 @@ public class PDFinfo {
 	
     /**
     * Get average process/domain score of an employee
-    * @param empID - the employeee id of the employee
-    * @return a string representaiton of the average score
+    * @param empID - the employee id of the employee
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public String getAverageScoresByProcessDomainEmployeeID(String empID) throws Exception{
@@ -160,8 +158,8 @@ public class PDFinfo {
 	
     /**
     * Get list of foundation scores of an employee
-    * @param empID - the employeee id of the employee
-    * @return a string representaiton of the average score
+    * @param empID - the employee id of the employee
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public ArrayList<String> getModScoreByFoundation(String empID) throws Exception{
@@ -181,8 +179,8 @@ public class PDFinfo {
 	
     /**
     * Get list of spec scores of an employee
-    * @param empID - the employeee id of the employee
-    * @return a string representaiton of the average score
+    * @param empID - the employee id of the employee
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public ArrayList<String> getModScoreBySpecialization(String empID) throws Exception{
@@ -202,8 +200,8 @@ public class PDFinfo {
 	
     /**
     * Get list of p&d scores of an employee
-    * @param empID - the employeee id of the employee
-    * @return a string representaiton of the average score
+    * @param empID - the employee id of the employee
+    * @return a string representation of the average score
     * @throws java.lang.Exception
     */
 	public ArrayList<String> getModScoreByProcessDomain(String empID) throws Exception{
