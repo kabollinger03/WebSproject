@@ -1,0 +1,45 @@
+nav{
+    font-family: 'Noto Sans', sans-serif;
+    background: #fff;
+}
+
+p, h1, h2, h3, h4, h5, h6, li, ul, ol{
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.atos-blue{
+    color: rgb(0,102,161) !important;
+}
+
+.noto{
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.font-dark{
+    color: #393E41;
+}
+
+.sidebar{
+    padding-top: 1%;
+    font-family: 'Noto Sans', sans-serif;
+    position: fixed;
+    height: 100%;
+    background: #fff;
+    font-size: .8em;
+}
+
+.nav-link{
+    color: #a6a6a6 !important;
+}
+
+.nav-link:hover{
+    color: rgb(0, 0, 255) !important;
+}
+
+.bg-white{
+    background: #fff;
+}
+
+.bg-gray{
+    background: #e5e5e5 !important;
+}

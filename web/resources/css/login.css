@@ -1,0 +1,24 @@
+body, html{
+	height: 100%;
+}
+
+.container-fluid{
+	background: #f0f0f0;
+	background-image: url(../img/bg.jpg);
+}
+
+.card{
+	background: #fff;
+}
+
+.bg-primary{
+	background: #0068a1 !important;
+}
+
+.text-white{
+	color: #fff !important;
+}
+
+.noto{
+	font-family: 'Noto Sans', sans-serif;
+}
