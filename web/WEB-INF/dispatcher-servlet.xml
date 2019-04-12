@@ -46,6 +46,11 @@
                 <prop key="delete-user.htm">adminController</prop>
                 <prop key="update-user.htm">adminController</prop>
                 
+                <prop key="manage-stream.htm">adminController</prop>
+                <prop key="create-stream.htm">adminController</prop>
+                <prop key="delete-stream.htm">adminController</prop>
+                <prop key="update-stream.htm">adminController</prop>
+                
                 <prop key="download.htm">downloadTemplateController</prop>
             </props>
         </property>
