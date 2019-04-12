@@ -13,7 +13,7 @@
           <a class="nav-link" href="admin.htm">Admin <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="instructor.htm">Instructor</a>
+          <a class="nav-link" href="createclass.htm">Instructor</a>
         </li>
       </ul>
       <ul class="navbar-nav d-md-none d-lg-block">
