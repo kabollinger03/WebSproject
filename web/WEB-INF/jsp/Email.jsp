@@ -92,7 +92,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin.jsp">Admin <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="admin.htm">Admin <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="instructor.jsp">Instructor</a>
@@ -159,7 +159,7 @@
                       <tr>
                         <td class="noto">${nameList[loop.index]}</td>
                         <td class="noto">${user}</td>
-                        <td class="text-center noto"><s:checkbox path="userNames" value="${user}" /></td>
+                        <td class="text-center noto"><s:checkbox path="userNames" value="${user}" name="userNames" /></td>
                       </tr>
 
                   </c:forEach>

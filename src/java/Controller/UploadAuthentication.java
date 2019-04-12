@@ -7,8 +7,7 @@ package Controller;
 
 import POJO.ExcelUploadObject;
 import ExcelUpload.*;
-import static ExcelUpload.Runner.ExcelUpload;
-import java.util.ArrayList;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
@@ -26,7 +25,7 @@ public class UploadAuthentication extends SimpleFormController{
     protected ModelAndView onSubmit(Object command) throws Exception {
        
         ExcelUploadObject excel =(ExcelUploadObject)command;
-        ExcelUpload(excel.getFile(), excel.getLocation(),excel.getSite(), excel.getStreamName());
+        Runner.ExcelUpload(excel.getFile(), excel.getLocation(),excel.getSite(), excel.getStreamName());
         
         // bring in all streams
         

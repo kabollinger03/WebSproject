@@ -29,13 +29,14 @@ public class AuthEmails extends SimpleFormController{
        CheckboxForm user=(CheckboxForm)command;
        
        String [] userNames = user.getUserNames();
-    
+       for(String x :userNames)
+           System.out.println(x);
        createPDFs(user.getUserNames());
 
         for(int i = 0; i<userNames.length;++i){
             SendEmail.sendIdividualEmail(userNames[i], SendEmail.getEmpId(userNames[i]));
         }
-       //SendEmail.sendIdividualEmail("phillipphoong@gmail.com", "mn");
+      // SendEmail.sendIdividualEmail("adpennella@gmail.com", "mn");
        
            
         return new ModelAndView("instructor");
@@ -48,13 +49,14 @@ public class AuthEmails extends SimpleFormController{
             ctx =  WebApplicationContextUtils.getRequiredWebApplicationContext(context);
             UserServiceDAO usrDAO = (UserServiceDAO)ctx.getBean("user1");
 
-            PDF temp = new PDF();
-            temp.setDataSource(usrDAO.getDataSource());
+            PDF temp = new PDF(usrDAO.getDataSource());
+            //temp.setDataSource(usrDAO.getDataSource());
+            System.out.println("len of ids = " + ids.length);
             for(int i=0; i<ids.length; ++i)
                 temp.generate(SendEmail.getEmpId(ids[i]));            
-            
+      
         }catch(Exception ex){
-            System.out.println("invalid");
+            System.out.println("invalid error in create PDFs");
             System.out.println(ex);
         }
         

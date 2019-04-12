@@ -150,19 +150,19 @@
                             <Table class="table">
                                 <tr class="my-2">
                                     
-                                <input type="hidden" name="streamID" id="streamID" value="">
+                                
                                     
                                     <td> Stream:</td> <!-- stream dropdown -->
                                     <td>
-                                        <form name="selectStreamForm" method="get" action="#">
-                                            <select id="selectedStream" name="selectedStream" class="form-control">
+                                        
+                                            <select id="selectedStream" name="streamName" class="form-control">
                                                 <c:forEach items="${allStreams}" var="stream">
                                                     <option value="${stream.ID}"> 
                                                         ${stream.name}
                                                     </option>
                                                 </c:forEach>
                                             </select>      
-                                        </form>
+                                        
                                     </td>
                                 </tr>
                                 <tr class="my-2">
