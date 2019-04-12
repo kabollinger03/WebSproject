@@ -49,7 +49,7 @@ public class Authentication extends SimpleFormController{
                 return new ModelAndView("admin", "user", user);
                 }
                 else
-                    return new ModelAndView("instructor", "user", user);
+                    return new ModelAndView("instructor");
             }
             else {
                 return new ModelAndView("Login");

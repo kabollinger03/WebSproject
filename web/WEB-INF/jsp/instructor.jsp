@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% response.sendRedirect("createclass.htm"); %>
+<%--
 <!DOCTYPE html>
 <html>
         <head>
@@ -27,7 +29,8 @@
         </head>
     <body>
         <h1>instructor page</h1>
-        <a href="createclass.htm">Excel</a>
-        <a href="email.htm">Send Emails Here</a>
+        <a href="createclass.htm">Create a class</a>
+        <a href="email.htm">Email hub</a>
     </body>
 </html>
+--%>

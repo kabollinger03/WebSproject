@@ -27,7 +27,7 @@ public class UploadAuthentication extends SimpleFormController{
        
        ExcelUploadObject excel =(ExcelUploadObject)command;
        ExcelUpload(excel.getFile(), excel.getLocation(),excel.getSite(), excel.getStreamName());
-
+        
         return new ModelAndView("instructor");
     }
 
