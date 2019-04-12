@@ -153,16 +153,28 @@
                                 <input type="hidden" name="streamID" id="streamID" value=""><
                                     
                                     <td> Stream:</td> <!-- stream dropdown -->
-                                    <td><select name="streamSelect" class="form-control">
-                                            <c:forEach items="${allStreams}" var="stream">
-                                                <option value="${stream.ID}"> 
-                                                    ${stream.name}
-                                                </option>
-                                            </c:forEach>
-                                        </select>
+                                    <td>
+                                        <form name="selectStreamForm" method="get" action="#">
+                                            <select id="selectedStream" name="selectedStream" class="form-control">
+                                                <c:forEach items="${allStreams}" var="stream">
+                                                    <option value="${stream.ID}"> 
+                                                        ${stream.name}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                            <input type="submit" name="whatever" value="go"></input>
+                                            
+                                        </form>
                                     </td>
 
-                                    <td><a href="">Download this stream's template</a></td>
+                                    <% String selectedStream = request.getParameter("selectedStream"); 
+                                        out.println(selectedStream);
+                                    %>
+                                    
+                                    <td><a href="DownloadTemplate.htm?streamID=" ${selectedStream}>
+                                            Download this stream's template
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr class="my-2">
                                     <td> Location:</td>
@@ -198,7 +210,7 @@
         
         
         <!-- Optional JavaScript -->
-
+  
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <!-- Popper.js -->
