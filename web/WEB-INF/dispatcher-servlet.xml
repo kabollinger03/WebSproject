@@ -50,6 +50,12 @@
                 <prop key="create-stream.htm">adminController</prop>
                 <prop key="delete-stream.htm">adminController</prop>
                 <prop key="update-stream.htm">adminController</prop>
+              
+                <prop key="manage-course.htm">adminController</prop>
+                <prop key="create-courses.htm">adminController</prop>
+                <prop key="delete-courses.htm">adminController</prop>
+                <prop key="update-courses.htm">adminController</prop>  
+                
                 
                 <prop key="download.htm">downloadTemplateController</prop>
             </props>

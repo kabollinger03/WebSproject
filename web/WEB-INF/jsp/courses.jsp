@@ -1,8 +1,105 @@
 <jsp:include page="head-tag.jsp"/>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="java.sql.*" %>
+
+<%
+  
+  //initialize driver class
+  try {    
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+  } catch (Exception e) {
+    out.println("Fail to initialize Oracle JDBC driver: " + e.toString() + "<P>");
+  }
+  
+  String dbUser = "Student_Performance";
+  String dbPasswd = "Student_Performance";
+  String dbURL = "jdbc:oracle:thin:@localhost:1521:XE";
+  //connect
+  Connection conn = null;
+  try {
+    conn = DriverManager.getConnection(dbURL,dbUser,dbPasswd);
+   
+  } catch(Exception e) {
+    out.println("Connection failed: " + e.toString() + "<P>");      
+  }
+  String sql;
+  int numRowsAffected;
+  Statement stmt = conn.createStatement();
+  ResultSet rs;
+  
+  // insert
+  /*try {
+    
+    sql = "insert into users values ('chris@syntelinc.com', 'password', 'N')";
+    numRowsAffected = stmt.executeUpdate(sql);
+    out.println(numRowsAffected + " user(s) inserted. <BR>");
+  
+  } catch (SQLException e) {
+    
+    out.println("Error encountered during row insertion for employee: " + e.toString() + "<BR>");
+  
+  }*/
+  
+  
+  // select
+  sql = "select c.course_name as course, m.module_name as module from courses c, modules m where c.module_id = m.module_id ";
+  rs = stmt.executeQuery(sql);
+  
+  ArrayList courseList = new ArrayList();
+  request.setAttribute("courseList", courseList);
+  
+  ArrayList modList = new ArrayList();
+  request.setAttribute("modList", modList);
+  
+ 
+  
+  while (rs.next()) {
+        courseList.add(rs.getString("course"));
+        modList.add(rs.getString("module"));
+        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
+        } // End while 
+  
+  
+  sql = "select module_name from modules";
+  rs = stmt.executeQuery(sql);
+  
+  ArrayList fullmodList = new ArrayList();
+  request.setAttribute("fullmodList", fullmodList);
+  
+ 
+  
+  while (rs.next()) {
+        fullmodList.add(rs.getString("module_name"));
+        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
+        } // End while 
+   //out.println(courseList.get(0));
+ 
+  // delete
+  /* try {
+    sql = "delete from users";
+    numRowsAffected = stmt.executeUpdate(sql);
+    out.println(numRowsAffected + " user(s) deleted. <BR>");
+  } catch (SQLException e) {
+    out.println("Error encountered during deletion of employee: " + e.toString() + "<BR>");
+  
+  }  
+  out.println("<P>"); */
+  
+  rs.close();
+  stmt.close();
+  //commit
+  conn.commit();
+  
+  //disconnect
+  conn.close();
+  
+%>  
+
 <body class="bg-light">
 
-<jsp:include page="nav.jsp"/>
+  <jsp:include page="nav.jsp"/>
   <div class="container-fluid">
     <div class="container mt-2 pt-4 pb-3">
       <nav aria-label="breadcrumb">
@@ -39,21 +136,27 @@
 
       <div class="row py-3">
         <div class="col-lg-12">
-          <form action="">
-          <div class="form">
-            <div class="form-row">
-              <div class="col-lg-2">
-                <button class="btn btn-small btn-success no-border" type="submit"><small><i class="fas fa-plus pr-2"></i>Insert Course</small></button>
-              </div>
-              <div class="col-lg-5">
-                <input type="text" class="form-control" placeholder="Course Name">
-              </div>
-              <div class="col-lg-5">
-                <input type="text" class="form-control" placeholder="Module Name">
+          <form action="create-courses.htm">
+            <div class="form">
+              <div class="form-row">
+                <div class="col-lg-2">
+                  <button class="btn btn-small btn-success no-border" type="submit"><small><i class="fas fa-plus pr-2"></i>Insert Course</small></button>
+                </div>
+                <div class="col-lg-5">
+                  <input type="text" name="coursename" class="form-control" placeholder="Course Name" required>
+                </div>
+                <div class="form-group col-md-5">
+                  <select class="custom-select" name= "modulename" id="modulename">
+                    <c:forEach items="${fullmodList}" var="modder">
+                        <option value="${modder}">
+                            ${modder}
+                        </option>
+                    </c:forEach>
+                    </select>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
         </div>
       </div>
 
@@ -66,21 +169,19 @@
           </tr>
         </thead>
         <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td><a href="manage-course.jsp?id=Big+Name&x=FFD-332">Big Name</a></td>
-              <td>sample-123</td>
-            </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td><a href="manage-course.jsp?id=Another+Big+Name&x=PSC-328">Another Big Name</a></td>
-            <td>sample-123</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td><a href="manage-course.jsp?id=Easy+Clap&x=PDM-551">Easy Clap</a></td>
-            <td>sample-123</td>
-          </tr>
+          <c:set var="count" value="1"/>
+         <c:forEach items="${courseList}" var="course">
+           <tr value="${course}">
+               <th scope="row">${count}</th>
+               <td>
+                   <a href="manage-course.htm?id=${course}">${course}</a>
+               </td>
+               <td>
+               ${modList.get(count-1)}
+               </td>
+           </tr>
+           <c:set var="count" value="${count + 1}"/>
+       </c:forEach>
         </tbody>
       </table>
     </div>
