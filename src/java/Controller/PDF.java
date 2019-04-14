@@ -30,7 +30,8 @@ public class PDF {
     public PDF(){this.font = BaseFont.Times;
 }
     
-	public PDF(DataSource dataSource) {
+	public PDF(DataSource dataSource) throws ClassNotFoundException {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
         this.font = BaseFont.Times;
         //super();
         System.out.println("Constructor Called");
@@ -85,7 +86,7 @@ public class PDF {
         ArrayList<String> specializations = new ArrayList();
         ArrayList<String> domains = new ArrayList();         
         String name, avgGrade, fGrade, sGrade, dGrade;
-        
+        System.out.println(empid + " EmpID");
         //init config
         njdbc = new NamedParameterJdbcTemplate(dataSource);
         PDFinfo info = new PDFinfo(dataSource.getConnection());
@@ -141,8 +142,10 @@ public class PDF {
         Paragraph found = new Paragraph();
         found.addMarkup("*Foundations*:  ", 12, font);
         for(int i = 0; i < foundations.size() - 2; i+=2){
+            
             found.addMarkup(foundations.get(i) + ",  ", 12, font);
         }
+        
         found.addMarkup(foundations.get(foundations.size() - 2), 12, font);
         document.add(found);
         document.add(new VerticalSpacer(linspace));
@@ -150,8 +153,10 @@ public class PDF {
         Paragraph spec = new Paragraph();
         spec.addMarkup("*Specializations*: ", 12, font);
         for(int i = 0; i < specializations.size() - 2; i+=2){
+            
             spec.addMarkup(specializations.get(i) + ",  ", 12, font);
         }
+        
         spec.addMarkup(specializations.get(specializations.size() - 2), 12, font);  
         document.add(spec);
         document.add(new VerticalSpacer(linspace));

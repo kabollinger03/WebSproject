@@ -240,9 +240,5 @@ public class SendEmail {
     	return batchEmails;
     }
     
-    public static void main(String[] args) {
-        PDF temp = new PDF();
-        
-        //temp.set()
-    }
+    
 }

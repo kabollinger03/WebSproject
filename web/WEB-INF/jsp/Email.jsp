@@ -159,7 +159,7 @@
                       <tr>
                         <td class="noto">${nameList[loop.index]}</td>
                         <td class="noto">${user}</td>
-                        <td class="text-center noto"><s:checkbox path="userNames" value="${user}" name="userNames" /></td>
+                        <td class="text-center noto"><s:checkbox path="userNames" value="${user}" /></td>
                       </tr>
 
                   </c:forEach>

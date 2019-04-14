@@ -88,6 +88,7 @@ public class PDFinfo {
     public ArrayList<String> getStreamIDName(String empID) throws Exception{
 		ArrayList<String> list = new ArrayList();
         Statement s1 = c1.createStatement();
+     
 		ResultSet r1=s1.executeQuery("select s.stream_id, s.stream_name from Stream s, Class c, Employees e where s.stream_id=c.stream_id and c.class_id=e.class_id and e.employee_id='"+empID+"'");
 		while(r1.next()){
 			list.add(r1.getString(1));

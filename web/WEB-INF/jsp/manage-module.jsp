@@ -102,14 +102,14 @@ try {
             <div class="form-group row mt-3">
               <label for="new_module" class="col-sm-3 col-form-label">Module</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="modName" name ="modName" placeholder="" value="${param.okay}">
+                <input type="text" class="form-control" id="modName" name ="modName" placeholder="" value="${param.okay}" required>
               </div>
             </div>
               
               <div class="form-group row mt-3">
               <label for="new_module" class="col-sm-3 col-form-label">Category</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="cat" name ="cat" placeholder="" value="${param.name}">
+                <input type="text" class="form-control" id="cat" name ="cat" placeholder="" value="${param.name}" required>
               </div>
             </div>
 

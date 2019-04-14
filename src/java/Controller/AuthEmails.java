@@ -49,9 +49,11 @@ public class AuthEmails extends SimpleFormController{
             ctx =  WebApplicationContextUtils.getRequiredWebApplicationContext(context);
             UserServiceDAO usrDAO = (UserServiceDAO)ctx.getBean("user1");
 
+           
+            
             PDF temp = new PDF(usrDAO.getDataSource());
             //temp.setDataSource(usrDAO.getDataSource());
-            System.out.println("len of ids = " + ids.length);
+
             for(int i=0; i<ids.length; ++i)
                 temp.generate(SendEmail.getEmpId(ids[i]));            
       
