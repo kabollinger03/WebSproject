@@ -5,7 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,6 +41,7 @@
                                                <img src="resources/img/logo-fake.png" class="img-fluid pt-3 pb-5">
 					</div>
 				</div>
+
 				<!-- Main login form -->
 				<s:form commandName="user" class="px-5 noto" id="login-form">
 					<div class="input-group mb-3">
@@ -52,10 +56,10 @@
 					  </div>
 					  <input type="password" class="form-control-lg form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
 					</div>
-                                        <!--forgot password "link"-->
+                                        
+                                        <!--forgot password link/button-->
 					<small class="text-muted">
-						<a id="myLink" href="#" onclick="sayHello()">Forgot Password?</a>
-						<!--<a id="myLink" href="#" onclick="swap(); return false;">Forgot Password?</a>-->
+                                            <a id="myLink" href="#" onclick="swap(); return false;">Forgot Password?</a>
                                         </small>
 					<div class="form-group text-center pt-2">
 						<button type="submit" href="#" class="btn icon-arrow-right bg-primary text-white rounded-0 px-5">
@@ -85,9 +89,7 @@
 		</div>
 	</div>
 
-    
-    <script src="/resources/js/greeting.js"></script>
-    <script src="/resources/js/form.js"></script>
+    <script src="<c:url value="/resources/js/form.js" />"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
