@@ -122,7 +122,7 @@ public class PDFinfo {
     * @throws java.lang.Exception
     */
 	public String getAverageScoresByFoundationEmployeeID(String empID) throws Exception{
-        String SQL = "select avg(e.scores) from Employees_take_Modules e, Modules m where m.category='Foundation' and m.module_id=e.module_id and e.employee_id= :id";
+        String SQL = "select avg(e.scores) from Employees_take_Modules e, Modules m where m.category_id='FOUND01' and m.module_id=e.module_id and e.employee_id= :id";
         SqlParameterSource namedParams= new MapSqlParameterSource("id",empID);
         String str = njdbc.queryForObject(SQL, namedParams, String.class);
 
@@ -136,7 +136,7 @@ public class PDFinfo {
     * @throws java.lang.Exception
     */
 	public String getAverageScoresBySpecializationEmployeeID(String empID) throws Exception{
-       String SQL = "select avg(e.scores) from Employees_take_Modules e, Modules m where m.category='Specialization' and m.module_id=e.module_id and e.employee_id= :id";
+       String SQL = "select avg(e.scores) from Employees_take_Modules e, Modules m where m.category_id='SPEC01' and m.module_id=e.module_id and e.employee_id= :id";
        SqlParameterSource namedParams= new MapSqlParameterSource("id",empID);
        String str = njdbc.queryForObject(SQL, namedParams, String.class);
 
@@ -150,7 +150,7 @@ public class PDFinfo {
     * @throws java.lang.Exception
     */
 	public String getAverageScoresByProcessDomainEmployeeID(String empID) throws Exception{
-            String SQL = "select avg(e.scores) from Employees_take_Modules e, Modules m where m.category='ProcessDomain' and m.module_id=e.module_id and e.employee_id=:id";
+            String SQL = "select avg(e.scores) from Employees_take_Modules e, Modules m where m.category_id='PD01' and m.module_id=e.module_id and e.employee_id=:id";
             SqlParameterSource namedParams= new MapSqlParameterSource("id",empID);
 			String str = njdbc.queryForObject(SQL, namedParams, String.class);
 
@@ -168,7 +168,7 @@ public class PDFinfo {
 		//Class.forName("oracle.jdbc.driver.OracleDriver");
 		// c1 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "Student_Performance", "Student_Performance");
 		Statement s1 = c1.createStatement();
-		ResultSet r1=s1.executeQuery("select m.module_name,e.scores from modules m, employees_take_modules e where m.module_id=e.module_id and category='Foundation' and e.employee_id='"+empID+"'");
+		ResultSet r1=s1.executeQuery("select m.module_name,e.scores from modules m, employees_take_modules e where m.module_id=e.module_id and category_id='FOUND01' and e.employee_id='"+empID+"'");
 		while(r1.next()){
 			list.add(r1.getString(1));
 			list.add(r1.getString(2));
@@ -189,7 +189,7 @@ public class PDFinfo {
 		//Class.forName("oracle.jdbc.driver.OracleDriver");
 		//c1 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "Student_Performance", "Student_Performance");
 		Statement s1 = c1.createStatement();
-		ResultSet r1=s1.executeQuery("select m.module_name,e.scores from modules m, employees_take_modules e where m.module_id=e.module_id and category='Specialization' and e.employee_id='"+empID+"'");
+		ResultSet r1=s1.executeQuery("select m.module_name,e.scores from modules m, employees_take_modules e where m.module_id=e.module_id and m.category_id='SPEC01' and e.employee_id='"+empID+"'");
 		while(r1.next()){
 			list.add(r1.getString(1));
 			list.add(r1.getString(2));
@@ -208,7 +208,7 @@ public class PDFinfo {
 	public ArrayList<String> getModScoreByProcessDomain(String empID) throws Exception{
 		ArrayList<String> list = new ArrayList<String>();
 		Statement s1 = c1.createStatement();
-		ResultSet r1=s1.executeQuery("select m.module_name,e.scores from modules m, employees_take_modules e where m.module_id=e.module_id and category='ProcessDomain' and e.employee_id='"+empID+"'");
+		ResultSet r1=s1.executeQuery("select m.module_name,e.scores from modules m, employees_take_modules e where m.module_id=e.module_id and m.category_id='PD01' and e.employee_id='"+empID+"'");
 		while(r1.next()){
 			list.add(r1.getString(1));
 			list.add(r1.getString(2));

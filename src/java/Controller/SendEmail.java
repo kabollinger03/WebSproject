@@ -30,8 +30,8 @@ public class SendEmail {
     public static void sendIdividualEmail(String email, String id) {
     	
         String host="smtp.gmail.com";
-        final String user="jmcgregtemp@gmail.com";//ENTER YOUR EMAIL!!
-        final String password="mcgregor1"; //ENTER YOUR PASSWORD
+        final String user="jmcgregtemp@gmail.com";
+        final String password="mcgregor1"; 
 
         String to=email;
 
@@ -57,6 +57,9 @@ public class SendEmail {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            String cc = getRM(email);
+            if(!cc.equals(""))
+                message.addRecipient(Message.RecipientType.CC, new InternetAddress(cc));
             message.setSubject("Employee Performance");
 
 
@@ -64,7 +67,9 @@ public class SendEmail {
             BodyPart messageBodyPart = new MimeBodyPart();
 
             // Now set the actual message
-            messageBodyPart.setText("Attached to this email is the pdf doc of the employee's performance.");
+            messageBodyPart.setText("Congratulations, " + getName(email) + "\nHere is your Performica Report! Inside is the score of each module you completed and a small graph"+
+            " to show where you stand compared to the class average. We hope you enjoyed your experience in our " +
+            " training program and wish you the best for your future!");
 
             // Create a multipart message
             Multipart multipart = new MimeMultipart();
@@ -74,8 +79,9 @@ public class SendEmail {
 
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            String filename = "C:/Users/syntel/Music/" + id + ".pdf";
-            DataSource source = new FileDataSource(filename);
+            String path = "C:/Users/syntel/Music/" + id + ".pdf";
+            String filename = id + ".pdf";
+            DataSource source = new FileDataSource(path);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
             multipart.addBodyPart(messageBodyPart);
@@ -190,6 +196,62 @@ public class SendEmail {
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","Student_Performance","Student_Performance");
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("select employee_id from employees where email = " + "'" + username + "'");
+			
+			while(rs.next())
+			{
+				return rs.getString(1);
+			}
+			
+			con.commit();
+	        st.close();
+	        con.close();
+                
+	    }
+		
+		catch (Exception ex) 
+		{
+			System.out.println(ex);
+	    }
+    	
+    	return " ";
+    }
+    
+    static String getName(String username) {
+    	
+    	try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver"); // Type 4 Driver Pure Java Driver
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","Student_Performance","Student_Performance");
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("select name from employees where email = " + "'" + username + "'");
+			
+			while(rs.next())
+			{
+				return rs.getString(1);
+			}
+			
+			con.commit();
+	        st.close();
+	        con.close();
+                
+	    }
+		
+		catch (Exception ex) 
+		{
+			System.out.println(ex);
+	    }
+    	
+    	return " ";
+    }
+        
+    static String getRM(String email) {
+    	
+    	try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver"); // Type 4 Driver Pure Java Driver
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","Student_Performance","Student_Performance");
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("select manager_id from employees where email = " + "'" + email + "'");
 			
 			while(rs.next())
 			{

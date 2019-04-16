@@ -36,7 +36,7 @@ public class AuthEmails extends SimpleFormController{
         for(int i = 0; i<userNames.length;++i){
             SendEmail.sendIdividualEmail(userNames[i], SendEmail.getEmpId(userNames[i]));
         }
-      // SendEmail.sendIdividualEmail("adpennella@gmail.com", "mn");
+      
        
            
         return new ModelAndView("instructor");
