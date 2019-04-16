@@ -31,6 +31,7 @@
   String streamName= request.getParameter("streamName");
   int id = Integer.parseInt(request.getParameter("moduleId"));
   String streamId="hi";
+  String modCategoryId = " ";
   out.println(modCategory);
   out.println(streamName);
   out.println(id);
@@ -38,8 +39,13 @@
   //insert
   
   
-  
    try {
+            sql = "Select Category_Id from Category where Category_name = '" + modCategory + "'";
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                modCategoryId = rs.getString(1);
+            }
+            
            sql = "select stream_id from stream where stream_name = '" + streamName + "'";
            rs = stmt.executeQuery(sql);
            while (rs.next()) {
@@ -53,38 +59,15 @@
            out.println("Error encountered during row select for users: " + e.toString() + "<BR>");
        }
    
-        try{sql = ("Update Modules set module_name= '" + moduleName + "', category= '" + modCategory + "', stream_id= '" + streamId + "' WHERE Module_Id=" + id);
+        try{sql = ("Update Modules set module_name= '" + moduleName + "', category_ID= '" + modCategoryId + "', stream_id= '" + streamId + "' WHERE Module_Id=" + id);
            numRowsAffected = stmt.executeUpdate(sql);
+           out.println(sql);
            out.println(numRowsAffected + " Updated <BR>");
         } catch (SQLException e) {
            out.println("Error encountered during row update for users: " + e.toString() + "<BR>");
        }
-       // select
-       /*sql = "select user_id from users";
-  rs = stmt.executeQuery(sql);
-  
-  ArrayList moduleList = new ArrayList();
-  request.setAttribute("moduleList", moduleList);
-  
-  while (rs.next()) {
-        moduleList.add(rs.getString("user_id"));
-        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
-        } // End while 
-  
-   out.println("<P>");*/
-       // delete
-       /* try {
-    sql = "delete from users";
-    numRowsAffected = stmt.executeUpdate(sql);
-    out.println(numRowsAffected + " user(s) deleted. <BR>");
-  } catch (SQLException e) {
-    out.println("Error encountered during deletion of employee: " + e.toString() + "<BR>");
-  
-  }  
-  out.println("<P>"); */
-       //rs.close();
-       stmt.close();
-       //commit
+       
+  stmt.close();
   conn.commit();
   
   //disconnect

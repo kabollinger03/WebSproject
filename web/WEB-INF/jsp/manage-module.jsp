@@ -37,6 +37,17 @@ try {
         streamName.add(rs.getString("stream_Name"));
         //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
         } // End while 
+  sql = "select Category_Name from Category";
+  rs = stmt.executeQuery(sql);
+  
+  ArrayList allCategoryName = new ArrayList();
+  request.setAttribute("allCategoryName",allCategoryName);
+  
+ while (rs.next()) {
+        allCategoryName.add(rs.getString("Category_Name"));
+        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
+        } // End while 
+  
  
 %>
 
@@ -109,7 +120,13 @@ try {
               <div class="form-group row mt-3">
               <label for="new_module" class="col-sm-3 col-form-label">Category</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="cat" name ="cat" placeholder="" value="${param.name}" required>
+                  <select id="inputState" class="form-control" required="" name ="cat">
+                        <c:forEach items="${allCategoryName}" var="catNam">
+                            <option value="${catNam}">
+                                ${catNam}
+                            </option>
+                        </c:forEach>
+                    </select>
               </div>
             </div>
 

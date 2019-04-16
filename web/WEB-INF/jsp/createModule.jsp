@@ -30,9 +30,16 @@
   String name = request.getParameter("modName");
   String modCategory = request.getParameter("modCategory"); 
   String streamName= request.getParameter("streamName");
+  String modCategoryId= " ";
   
   //insert
    try {
+       sql = "Select Category_Id from Category where Category_name = '" + modCategory + "'";
+       rs=stmt.executeQuery(sql);
+       if(rs.next())
+       {
+           modCategoryId= rs.getString(1);
+       }
        sql = "Select Stream_Id from Stream where stream_name = '" + streamName + "'";
        rs=stmt.executeQuery(sql);
        if(rs.next())
@@ -45,7 +52,7 @@
 			{
                 id = (rs.getInt(1) + 1); // increment the max ID to create a new one
 			}
-        sql = ("INSERT INTO modules VALUES("+id+",'"+name+"', '" +modCategory+"', '"+stream+"')");
+        sql = ("INSERT INTO modules VALUES("+id+",'"+name+"', '" +modCategoryId+"', '"+stream+"')");
         numRowsAffected = stmt.executeUpdate(sql);
   
         } catch (SQLException e) {
