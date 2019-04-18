@@ -10,12 +10,11 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-    
-    <mvc:resources mapping="/resources/**" location="resources/"></mvc:resources>
+    <!--static files-->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:resources location="/img/" mapping="/img/**" />
-    <mvc:resources mapping="/js/**" location="/js/" />
 
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -62,7 +61,9 @@
                 <prop key="updateModule.htm">adminController</prop>
                 
                 <prop key="download.htm">downloadTemplateController</prop>
+                <prop key="reset-password.htm">resetController</prop>
                 <prop key="pdfviewer.htm">pdfViewerController</prop>
+              
             </props>
         </property>
     </bean>
@@ -84,6 +85,11 @@
     <bean name="loginController"
           class="Controller.Authentication"
           p:formView="Login"
+       />
+    
+    <bean name="resetController"
+          class="Controller.ResetPass"
+          p:formView="reset-password"
        />
     
     <bean name="adminController"

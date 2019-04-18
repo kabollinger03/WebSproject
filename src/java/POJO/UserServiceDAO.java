@@ -5,6 +5,7 @@
  */
 package POJO;
 
+import java.sql.PreparedStatement;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -33,6 +34,13 @@ public class UserServiceDAO implements UserDAO{
     
     public DataSource getDataSource(){
         return dataSource;
+    }
+
+    @Override
+    public void setUserPassword(String id, String password) {
+        String SQL = "update users set password = ? where user_id = ?";
+        
+        jdbcTemplateObject.update(SQL, password, id);
     }
     
     
