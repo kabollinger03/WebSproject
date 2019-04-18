@@ -47,13 +47,14 @@ try {
         allCategoryName.add(rs.getString("Category_Name"));
         //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
         } // End while 
-  
+ 
  
 %>
 
 
 
 <jsp:include page="head-tag.jsp"/>
+
 
 <body class="bg-light">
 
@@ -121,6 +122,7 @@ try {
               <label for="new_module" class="col-sm-3 col-form-label">Category</label>
               <div class="col-sm-9">
                   <select id="inputState" class="form-control" required="" name ="cat">
+                        <option selected hidden value="${param.name}">${param.name}</option>
                         <c:forEach items="${allCategoryName}" var="catNam">
                             <option value="${catNam}">
                                 ${catNam}
@@ -134,6 +136,7 @@ try {
               <label for="new_stream_id" class="col-sm-3 col-form-label">Stream Name</label>
               <div class="col-sm-9">
                   <select id="inputState" class="form-control" required="" name ="streamName" id ="streamName">
+                      <option selected hidden value="${param.stream}">${param.stream}</option>
                       <c:forEach items="${streamName}" var="stream">
                           <option value="${stream}">
                               ${stream}

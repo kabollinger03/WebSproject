@@ -104,19 +104,35 @@
   //request.setAttribute("junk", junk);
   
   while (rs.next()) {
-        streamNameList.add(rs.getString("stream_name"));
-        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
-        } // End while 
-  
+          streamNameList.add(rs.getString("stream_name"));
+          //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
+      } // End while 
 
-    
-    
-    // select
-  sql = "select stream_Name from stream";
-  rs = stmt.executeQuery(sql);
-  
-  
-  
+      String s= "";
+      String snew="";
+      ArrayList CleanName=new ArrayList();
+
+      for (int j = 0; j < moduleList.size(); j++) {
+              s = String.valueOf(moduleList.get(j));
+              snew = "";
+              for (int i = 0; i < s.length(); i++) {
+                  if (s.charAt(i) == '+') {
+                      snew = snew + "%2B";
+                  } else if (s.charAt(i) == '#') {
+                      snew = snew + "%23";
+                  } else {
+                      snew = snew + s.charAt(i);
+                  }
+              }
+              CleanName.add(snew);
+          }
+      
+      request.setAttribute("CleanName", CleanName);
+      //out.println(CleanName);
+
+      // select
+      sql = "select stream_Name from stream";
+      rs = stmt.executeQuery(sql);
   rs.close();
   stmt.close();
   //commit
@@ -212,7 +228,7 @@
             <c:set var="count" value="1"/>
             <c:forEach items="${moduleList}" var="module">
             <tr value="${module}">
-                <th scope="row"><a href="manage-module.htm?id=${moduleIdList.get(count-1)}&name=${catagoryName.get(count-1)}&stream=${streamNameList.get(count-1)}&okay=${module}">${moduleIdList.get(count-1)}</a></th>
+                <th scope="row"><a href="manage-module.htm?id=${moduleIdList.get(count-1)}&name=${catagoryName.get(count-1)}&stream=${streamNameList.get(count-1)}&okay=${CleanName.get(count-1)}">${moduleIdList.get(count-1)}</a></th>
                 <td>
                    ${module}
                 </td>
