@@ -11,9 +11,8 @@
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!--static files-->
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-    <mvc:annotation-driven />
-    <mvc:resources mapping="/resources/**" location="resources/"></mvc:resources>
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources location="/img/" mapping="/img/**" />
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     <!--
@@ -62,6 +61,7 @@
                 <prop key="updateModule.htm">adminController</prop>
                 
                 <prop key="download.htm">downloadTemplateController</prop>
+                <prop key="reset-password.htm">resetController</prop>
             </props>
         </property>
     </bean>
@@ -85,6 +85,11 @@
           p:formView="Login"
        />
     
+    <bean name="resetController"
+          class="Controller.ResetPass"
+          p:formView="reset-password"
+       />
+    
     <bean name="adminController"
           class="Controller.AdminController">
     </bean>
@@ -106,6 +111,7 @@
     <bean name="downloadTemplateController"
         class="Controller.DownloadTemplateController"
     />
+
     <bean id = "multipartResolver" 
           class ="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
     

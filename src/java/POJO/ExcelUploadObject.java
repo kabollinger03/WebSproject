@@ -1,13 +1,13 @@
 package POJO;
 
 import java.io.File;
-import org.springframework.web.multipart.MultipartFile;
 
 public class ExcelUploadObject {
 	
 	private String streamName;
 	private String location;
 	private String site;
+
 	private MultipartFile file;
         private String insEmail;
         private String startDate;
@@ -56,6 +56,7 @@ public class ExcelUploadObject {
         }
 	
 
+
 	public ExcelUploadObject() {
 		super();
 
@@ -80,10 +81,10 @@ public class ExcelUploadObject {
 	public void setSite(String site) {
 		this.site = site;
 	}
-	public MultipartFile getFile() {
+	public File getFile() {
 		return file;
 	}
-	public void setFile(MultipartFile file) {
+	public void setFile(File file) {
 		this.file = file;
 	}
 

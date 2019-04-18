@@ -9,6 +9,7 @@ public class PasswordGenerator {
                 .useDigits(true)
                 .useLower(true)
                 .useUpper(true)
+                .usePunctuation(true)
                 .build();
         String password = passwordGenerator.generate(8); // output ex.: lrU12fmM 75iwI90o
         System.out.println(password);

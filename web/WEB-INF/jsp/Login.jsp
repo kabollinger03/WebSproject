@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
@@ -26,8 +27,6 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<!-- Google Fonts (Noto Sans) --> 
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-        
-        
 
 	<title>Home</title>
 </head>
@@ -59,7 +58,7 @@
                                         
                                         <!--forgot password link/button-->
 					<small class="text-muted">
-                                            <a id="myLink" href="#" onclick="swap(); return false;">Forgot Password?</a>
+                                            <a id="myLink" href="reset-password.htm">Forgot Password?</a>
                                         </small>
 					<div class="form-group text-center pt-2">
 						<button type="submit" href="#" class="btn icon-arrow-right bg-primary text-white rounded-0 px-5">
@@ -67,24 +66,6 @@
 						</button>
 					</div>
 				</s:form>
-				<!-- Forgot Password form -->
-				<form class="px-5 noto" id="forgot-pw-form" style="display: none;">
-					<div class="input-group mb-3">
-					  <div class="input-group-prepend">
-					    <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
-					  </div>
-					  <input type="email" class="form-control-lg form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-					</div>
-					
-					<small class="text-muted">
-						<a id="myLink" href="#" onclick="swap_back(); return false;">Return to Login</a>
-					</small>
-					<div class="form-group text-center pt-2">
-						<a href="#" class="btn icon-arrow-right bg-primary text-white rounded-0 px-5">
-							Send Reset
-						</a>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
