@@ -38,6 +38,14 @@
   String newUser_name = request.getParameter("newusername");
   String admin = request.getParameter("example");  
  
+    String sql2;
+
+    sql2 = "select user_id from users where user_id='" + newUser_name + "' and user_id!='" + user_name + "'";
+
+    rs = stmt.executeQuery(sql2);
+  
+    if(rs.next() == false)
+    {
   //insert
    try {
     
@@ -47,7 +55,7 @@
         } catch (SQLException e) {
         out.println("Error encountered during row insertion for users: " + e.toString() + "<BR>");
         }
-   
+    }
   
   
   

@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="admin.htm">Admin <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="streams.htm">Admin <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="createclass.htm">Instructor</a>
@@ -19,12 +19,12 @@
       <ul class="navbar-nav d-md-none d-lg-block">
         <div class="btn-group mr-3">
           <button style="color: #fff;" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <small> <i class="fas fa-user pr-1"></i> </small>
+           <small> <i class="fas fa-user pr-1"> </i><%String username = (String)session.getAttribute("username"); out.println(username);%> </small>
           </button>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#"><small><i class="fas fa-lock pr-2"></i>Change Password</small></a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><small>Logout</small></a>
+            <a class="dropdown-item" href="login.htm"><small>Logout</small></a>
           </div>
         </div>
       </ul>

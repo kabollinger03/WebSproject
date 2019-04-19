@@ -37,7 +37,15 @@
   //String passWord = request.getParameter("password");
   //String admin = request.getParameter("isadmin");
 
+   String sql2;
+  ResultSet rs2;
+ // Statement stmt2 = conn.createStatement();  
+ sql2 = "select category_name from category where category_name='" + category_name + "'";
   
+ rs2 = stmt.executeQuery(sql2);
+  
+ if(rs2.next() == false)
+ {
   //insert
    try {
     
@@ -48,7 +56,7 @@
         } catch (SQLException e) {
         out.println("Error encountered during insertion for stream: " + e.toString() + "<BR>");
         }
-   
+ } 
   
   // select
   /*sql = "select user_id from users";

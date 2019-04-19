@@ -50,10 +50,12 @@ try {
  
 //check to see if it can be deleted
 String id = request.getParameter("id");
+String mn = request.getParameter("module_name");
 sql3 = "select c.course_name from courses c, modules m where c.module_id=m.module_id and m.module_id = " + id;
 rs = stmt.executeQuery(sql);
 
 boolean moduleCanBeDeleted = rs.next();
+
 %>
 
 
@@ -125,9 +127,12 @@ boolean moduleCanBeDeleted = rs.next();
             <div class="form-group row mt-3">
               <label for="new_module" class="col-sm-3 col-form-label">Module</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="modName" name ="modName" placeholder="" value="${param.okay}" required>
+                <input type="text" class="form-control" id="modName" onchange="myFunction()" name ="modName" placeholder="" value="${param.okay}" required>
+                <div><small id="jackson_1" class="text-danger"></small></div>
               </div>
             </div>
+              
+              
               
               <div class="form-group row mt-3">
               <label for="new_module" class="col-sm-3 col-form-label">Category</label>
@@ -142,7 +147,9 @@ boolean moduleCanBeDeleted = rs.next();
                     </select>
               </div>
             </div>
-
+                        
+                        
+                        
             <div class="form-group row mt-3">
               <label for="new_stream_id" class="col-sm-3 col-form-label">Stream Name</label>
               <div class="col-sm-9">
@@ -185,3 +192,21 @@ boolean moduleCanBeDeleted = rs.next();
 
 </body>
 </html>
+
+<script>
+function myFunction()
+{
+  var modName = document.getElementById("modName").value;
+  var modId = document.getElementById("moduleId").value;
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("jackson_1").innerHTML = this.responseText;
+    }
+  };
+  
+  xhttp.open("GET", "jackson_1.htm?modName="+modName+"&modId="+modId+"&num=1", true);
+  xhttp.send();
+}
+</script>

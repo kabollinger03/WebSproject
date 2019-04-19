@@ -35,8 +35,17 @@
   String module_name = request.getParameter("modulename");
   String course_name_original = request.getParameter("course_name");
  
-
+  String sql2;
+  ResultSet rs3;
   
+ sql2 = "select course_name from courses where course_name='" + course_name_new + "' and course_name !='" + 
+         course_name_original + "'";
+  
+  rs3 = stmt.executeQuery(sql2);
+ 
+
+ if(rs3.next() == false)
+ {
   //insert
    try {
     
@@ -47,7 +56,7 @@
         } catch (SQLException e) {
         out.println("Error encountered during update for stream: " + e.toString() + "<BR>");
         }
-  
+ }
   //rs.close();
   stmt.close();
 

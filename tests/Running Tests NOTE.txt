@@ -1,0 +1,1 @@
+NOTE: The Selenium project is configured to run on localhost port whatever Kate has. You will need to change the port to whatever you have for it to work.

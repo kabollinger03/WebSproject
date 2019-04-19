@@ -10,8 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!--database access-->
-<%
-           
+<%          
    //initialize driver class
     try {    
       Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -83,38 +82,7 @@
     </head>
     <body class="bg-light">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <i class="fas fa-rocket"></i>
-                    <!--<img width="30" height="30" position="inline-block" src="img/rocket-ship.png"/>-->
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mr-auto">
-                  
-                        <li class="nav-item">
-                            <a class="nav-link" href="createclass.htm">Instructor</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav d-md-none d-lg-block">
-                        <div class="btn-group mr-3">
-                            <button style="color: #fff;" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <small> <i class="fas fa-user pr-1"></i></small>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><small><i class="fas fa-lock pr-2"></i>Change Password</small></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.htm"><small>Logout</small></a>
-                            </div>
-                        </div>
-                    </ul>
-
-                </div>
-            </div><!-- /Container -->
-        </nav>
+         <jsp:include page="nav.jsp"/>
         <!-- End Navbar -->
         
         <div class="container-fluid">
@@ -235,6 +203,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
          <script src="<c:url value="/resources/js/classValidate.js" />"></script>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </body>
 </html>
 

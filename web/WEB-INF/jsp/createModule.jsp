@@ -32,6 +32,14 @@
   String streamName= request.getParameter("streamName");
   String modCategoryId= " ";
   
+  String sql2;
+  
+  sql2 = "select module_name from modules where module_name='" + name + "'";
+  
+  rs = stmt.executeQuery(sql2);
+  
+  if(rs.next() == false)
+  {
   //insert
    try {
        sql = "Select Category_Id from Category where Category_name = '" + modCategory + "'";
@@ -58,7 +66,7 @@
         } catch (SQLException e) {
         out.println("Error encountered during row insertion for users: " + e.toString() + "<BR>");
         }
-   
+  }
   //out.println(stream);
   
   

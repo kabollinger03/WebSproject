@@ -1,9 +1,9 @@
 package Controller;
-//You will need apache pdfbox, apache fontbox, apache commonsloggings, jdbc JARs
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.sql.DataSource;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,25 +15,27 @@ import rst.pdfbox.layout.elements.VerticalSpacer;
 import rst.pdfbox.layout.elements.render.VerticalLayoutHint;
 import rst.pdfbox.layout.text.Alignment;
 import rst.pdfbox.layout.text.BaseFont;
+import rst.pdfbox.layout.elements.ImageElement;
+
+//import org.jfree.chart.ChartUtilities;
 
 public class PDF {
     
     private static DataSource dataSource;
     private NamedParameterJdbcTemplate njdbc;
 
-	private BaseFont font;
+	private final static BaseFont font = BaseFont.Helvetica;
 	private PDPage page = new PDPage();
     private PDFinfo pdfinfo;
 
-	private String filePath = "C:/Users/syntel/Music/";//Path to save the pdf
-    
-    public PDF(){this.font = BaseFont.Times;
-}
+	private String filePath = "C:/Users/syntel/Music/"; //use getfilepath in the email logic?
+    private final static String imagePath = "C:\\trainingkb\\WebSproject\\web\\resources\\img\\pdf_banner.png"; //path to AS logo
+
+    //java.io.File.separator
+    public PDF(){}
     
 	public PDF(DataSource dataSource) throws ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        this.font = BaseFont.Times;
-        //super();
         System.out.println("Constructor Called");
         PDF.dataSource=dataSource;
         njdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -101,95 +103,146 @@ public class PDF {
         //populate output variables
         name=info.getEmployeeName(empid);
         stream=info.getStreamIDName(empid);
-        avgGrade=info.getAverageScoresByEmployeeID(empid);
-        foundations.addAll(info.getModScoreByFoundation(empid));
-        specializations.addAll(info.getModScoreBySpecialization(empid));
-        domains.addAll(info.getModScoreByProcessDomain(empid));
-        fGrade=info.getAverageScoresByFoundationEmployeeID(empid);
-        sGrade=info.getAverageScoresBySpecializationEmployeeID(empid);
-        dGrade=info.getAverageScoresByProcessDomainEmployeeID(empid);
+        avgGrade=info.getAverageScore(empid);
+        foundations.addAll(info.getModuleScoresByCategory(empid, "FOUND01"));
+        specializations.addAll(info.getModuleScoresByCategory(empid, "SPEC01"));
+        domains.addAll(info.getModuleScoresByCategory(empid, "PD01"));
+        fGrade=info.getAverageScoreByCategory(empid, "FOUND01");
+        sGrade=info.getAverageScoreByCategory(empid, "SPEC01");
+        dGrade=info.getAverageScoreByCategory(empid, "PD01");
 		
-        Document document = new Document(40, 50, 40, 60);
-        float linspace = 4;
-        float sectionBreak = 6.5f;
+        //define a <hr />
+        char[] charArray = new char[1835];
+        Arrays.fill(charArray, ' ');
+        String hrHelp = new String(charArray);
         
+        Paragraph hRule = new Paragraph();
+        hRule.addMarkup("__" + hrHelp + " __", 1, font); 
+        //because the "real way" is being diffuclt, cheat by adding a realy tiny empty string that is underlined.
+        
+        //create PDF
+        float linspace = 12;
+        float sectionBreak = 18;
+        float leftMargin = 40;
+        float rightMargin = 40;
+        float topMargin = 20;
+        float bottomMargin = 20;
+        Document document = new Document(leftMargin, rightMargin, topMargin, bottomMargin);
+        
+        document.add(new ImageElement(imagePath), new VerticalLayoutHint(Alignment.Left, 0, 0,
+		0, 0, true));
+        document.add(new VerticalSpacer(100));
+                        
         Paragraph title = new Paragraph();
-        title.addMarkup("*PERFORMICA REPORT*", 20, font);
+        title.addMarkup("{color:#0066a1}__***PERFORMICA REPORT***__", 20, font);
        	document.add(title, VerticalLayoutHint.CENTER);
-        document.add(new VerticalSpacer(5));
+        document.add(new VerticalSpacer(sectionBreak));
    
         Paragraph emp = new Paragraph();
-        emp.addMarkup( "*NAME*: " + name + "            " +
-                "*EMPLOYEE ID*: " + empid, 14, font);
+        emp.addMarkup( "{color:#0066a1}*NAME*{color:#000000}: " + name + "            " +
+                "{color:#0066a1}*EMPLOYEE ID*{color:#000000}: " + empid, 14, font);
         emp.setAlignment(Alignment.Center);
         document.add(emp);
         
-        document.add(new VerticalSpacer(6.5f));
+        //document.add(new VerticalSpacer(6.5f));
         
-        System.out.println("stream is " + stream.size());
-        Paragraph strm = new Paragraph();
-        strm.addMarkup("*INDUCTION*: " + stream.get(0) + " - " + stream.get(1), 14, font);
+        document.add(new VerticalSpacer(2*sectionBreak));
+        
+        Paragraph p1 = new Paragraph();
+        p1.addMarkup("{color:#0066a1}__*My Trainings*__:", 12, font);
+        document.add(p1);
+        document.add(new VerticalSpacer(linspace));
+        
+        Paragraph pur = new Paragraph();
+        pur.addMarkup("{color:#000000}*Stream*: " + stream.get(0) + " - " + stream.get(1), 12, font);
+        document.add(pur);
+        document.add(new VerticalSpacer(linspace));
+        
+        /*Paragraph strm = new Paragraph();
+        strm.addMarkup("{color:#0066a1}*INDUCTION*{color:#000000}: " + stream.get(0) + " - " + stream.get(1), 14, font);
         strm.setAlignment(Alignment.Center);
         document.add(strm);
+        
 		
         document.add(new VerticalSpacer(15.5f));
         
         Paragraph p1 = new Paragraph();
-        p1.addMarkup("__*Training Modules Completed*__", 12, font);
+        p1.addMarkup("{color:#0066a1}*Training Modules Completed*", 12, font);
         document.add(p1);
         document.add(new VerticalSpacer(linspace));
+        */
         
+        document.add(hRule);
+        document.add(new VerticalSpacer(5));
         Paragraph found = new Paragraph();
-        found.addMarkup("*Foundations*:  ", 12, font);
+        found.addMarkup("{color:#0066a1}*Foundations*{color:#000000}:  ", 11, font);
         for(int i = 0; i < foundations.size() - 2; i+=2){
             
-            found.addMarkup(foundations.get(i) + ",  ", 12, font);
+            found.addMarkup(foundations.get(i) + ",  ", 11, font);
         }
-        
-        found.addMarkup(foundations.get(foundations.size() - 2), 12, font);
+        found.addMarkup(foundations.get(foundations.size() - 2), 11, font);
+
         document.add(found);
+        document.add(hRule);
         document.add(new VerticalSpacer(linspace));
 
         Paragraph spec = new Paragraph();
-        spec.addMarkup("*Specializations*: ", 12, font);
+        spec.addMarkup("{color:#0066a1}*Specializations*{color:#000000}: ", 11, font);
         for(int i = 0; i < specializations.size() - 2; i+=2){
             
-            spec.addMarkup(specializations.get(i) + ",  ", 12, font);
+            spec.addMarkup(specializations.get(i) + ",  ", 11, font);
         }
         
-        spec.addMarkup(specializations.get(specializations.size() - 2), 12, font);  
+        spec.addMarkup(specializations.get(specializations.size() - 2), 11, font);  
         document.add(spec);
+        document.add(hRule);
         document.add(new VerticalSpacer(linspace));
         
         Paragraph pd = new Paragraph();
-        pd.addMarkup("*Process / Domain*: ", 12, font);
+        pd.addMarkup("{color:#0066a1}*Process / Domain*{color:#000000}: ", 11, font);
         for(int i = 0; i < domains.size() - 2; i+=2){
-            pd.addMarkup(domains.get(i) + ",  ", 12, font);
+            pd.addMarkup(domains.get(i) + ",  ", 11, font);
         }
-        pd.addMarkup(domains.get(domains.size() - 2), 12, font);  
+        pd.addMarkup(domains.get(domains.size() - 2), 11, font);  
         document.add(pd);
-        
+        document.add(hRule);
         document.add(new VerticalSpacer(sectionBreak));
         
         Paragraph p2 = new Paragraph();
-        p2.addMarkup("__*Performence Report*__\nThis is where we would put the bargraph if we had it", 12, font);
+        p2.addMarkup("{color:#0066a1}__*My Performence*__\n\n<<bargraph goes here>>", 12, font); //http://www.java2s.com/Code/Java/Chart/JFreeChartHorizontalBarChartDemo2.htm
         document.add(new VerticalSpacer(linspace));
         document.add(p2);
-        document.add(new VerticalSpacer(350));
+        document.add(new VerticalSpacer(50));
         
-        String gradeNumbers = "Overall Grade: "+avgGrade+"  |  "
+        String gradeNumbers = "Overall Grade: " + avgGrade + "\n"
                 + "Foundation Grade: "+fGrade+"  |  "
                 + "Specialization Grade: "+sGrade+"  |  "
-                + "Process/Domain Grade: "+dGrade+"   ";
+                + "Process/Domain Grade: "+dGrade;
         Paragraph grades = new Paragraph();
-        grades.addMarkup(gradeNumbers, 12, font);
+        grades.addMarkup(gradeNumbers, 11, font);
+        grades.setAlignment(Alignment.Center);
         document.add(grades);
         document.add(new VerticalSpacer(linspace));
+        
+        Paragraph quote = new Paragraph();
+        quote.addMarkup("{color:#000000}_*\"Learning is the lifelong process of transforming information and experience into knowledge, skills, behaviours and attitudes\"*_\n", 10, font);
+        quote.addMarkup(" - Jeff Cobb, _10 Ways to be a Better Learner_", 10, font);
+        quote.setAlignment(Alignment.Center);
+        document.add(new VerticalSpacer(5*linspace));
+        document.add(quote);
+        //document.add(new VerticalSpacer(linspace));
         
         final OutputStream outputStream = new FileOutputStream(
 		filePath + empid + ".pdf");
         document.save(outputStream);
-    
-        //BarChartEx bc = new BarChartEx();
+
 	}	
 }
+
+        /* "Real Way" to underline Do not use - inserts new, completely blank, page before rest of content.
+        * Saved for possible later use and as a reminder to not Do The Thing
+        Stroke stroke = new Stroke();
+        RenderContext rc = new RenderContext(document, document.getPDDocument());
+        stroke.applyTo(rc.getContentStream());
+        rc.close();
+        */

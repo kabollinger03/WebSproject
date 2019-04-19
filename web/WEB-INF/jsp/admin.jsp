@@ -107,7 +107,8 @@
                 <button class="btn btn-sm mt-1 btn-primary no-border" onclick="checkDomain();" type="submit"><i class="fas fa-plus pr-2"></i>Insert User</button>
               </div>
               <div class="col-6">
-                <input type="email" class="form-control" id="username" name="username"  placeholder="Email" pattern="[a-zA-Z][a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be a valid atos or syntel email" required>
+                <input type="email" class="form-control" id="username" onChange="myFunction()" name="username"  placeholder="Email" pattern="[a-zA-Z][a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be a valid atos or syntel email" required>
+              <div><small id="jackson_1" class="text-danger"></small></div>
               </div>
               <div >
                 <input type="hidden" class="form-control" id="password" name="password"  value="syntel123" >
@@ -171,3 +172,20 @@
 
 </body>
 </html>
+
+<script>
+function myFunction()
+{
+  var uName = document.getElementById("username").value;
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("jackson_1").innerHTML = this.responseText;
+    }
+  };
+  
+  xhttp.open("GET", "jackson_1.htm?name="+uName+"&num=10", true);
+  xhttp.send();
+}
+</script>

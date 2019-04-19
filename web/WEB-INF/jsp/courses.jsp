@@ -146,7 +146,8 @@
                   <button class="btn btn-sm btn-primary mt-1 no-border" type="submit"><i class="fas fa-plus pr-2"></i>Insert Course</button>
                 </div>
                 <div class="col-lg-5">
-                  <input type="text" name="coursename" class="form-control" placeholder="Course Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{0,45}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 1 and 45 characters." required>
+                  <input type="text" name="coursename" id="coursename" class="form-control" onChange="myFunction()" placeholder="Course Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{0,45}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 1 and 45 characters." required>
+                <div><small id="jackson_1" class="text-danger"></small></div>
                 </div>
                 <div class="form-group col-md-5">
                   <select class="custom-select" name= "modulename" id="modulename">
@@ -202,3 +203,20 @@
 
 </body>
 </html>
+
+<script>
+function myFunction()
+{
+  var cName = document.getElementById("coursename").value;
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("jackson_1").innerHTML = this.responseText;
+    }
+  };
+  
+  xhttp.open("GET", "jackson_1.htm?name="+cName+"&num=8", true);
+  xhttp.send();
+}
+</script>

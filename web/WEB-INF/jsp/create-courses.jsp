@@ -51,6 +51,15 @@
   out.println(course_name);
   out.println("=================");
  
+  String sql2;
+  ResultSet rs2;
+ // Statement stmt2 = conn.createStatement();  
+ sql2 = "select course_name from courses where course_name='" + course_name + "'";
+  
+ rs2 = stmt.executeQuery(sql2);
+  
+ if(rs2.next() == false)
+ {
   //insert
    try {
     
@@ -60,9 +69,8 @@
   
         } catch (SQLException e) {
         out.println("Error encountered during row insertion for users: " + e.toString() + "<BR>");
-        }
-   
-  
+        } 
+ }
   
   
   //rs.close();

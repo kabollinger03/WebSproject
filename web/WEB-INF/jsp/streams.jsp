@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*" %>
 
 <%
-  
+  session.setAttribute("username", request.getAttribute("username"));
   
   //initialize driver class
   try {    
@@ -66,7 +66,6 @@
   
 %>  
 
-
 <jsp:include page="head-tag.jsp"/>
 
 <body class="bg-light">
@@ -118,7 +117,8 @@
                 <button class="btn btn-sm btn-primary no-border mt-1" type="submit"><i class="fas fa-plus pr-2"></i>Insert Stream</button>
               </div>
               <div class="col-lg-10">
-               <input type="text" class="form-control" id ="streamName" name="streamName" placeholder="Stream Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,50}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 3 and 50 characters." required>
+               <input type="text" class="form-control" id ="streamName" onchange="myFunction()" name="streamName" placeholder="Stream Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,50}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 3 and 50 characters." required>
+              <div><small id="jackson_1" class="text-danger"></small></div>
               </div>
             </div>
           </div>
@@ -161,3 +161,20 @@
 
 </body>
 </html>
+
+<script>
+function myFunction()
+{
+  var sName = document.getElementById("streamName").value;
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("jackson_1").innerHTML = this.responseText;
+    }
+  };
+  
+  xhttp.open("GET", "jackson_1.htm?name="+sName+"&num=7", true);
+  xhttp.send();
+}
+</script>

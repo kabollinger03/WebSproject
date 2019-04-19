@@ -24,10 +24,10 @@ try {
     out.println("Connection failed: " + e.toString() + "<P>");      
   }
 
-String sql;
+String sql, sql2;
 int numRowsAffected;
 Statement stmt = conn.createStatement();
-ResultSet rs;
+ResultSet rs, rs2;
 String stream_name = request.getParameter("id");
 
 sql = "select m.module_name from modules m, stream s where s.stream_id = m.stream_id and stream_name ='" + stream_name + "'";
@@ -36,6 +36,7 @@ rs = stmt.executeQuery(sql);
 boolean streamCantBeDeleted = rs.next();
 
 %>
+
 <body class="bg-light">
 
   <jsp:include page="nav.jsp"/>
@@ -99,7 +100,8 @@ boolean streamCantBeDeleted = rs.next();
               <label for="new_stream_name" class="col-sm-3 col-form-label">Stream</label>
               <div class="col-sm-9">
                   <input type ="hidden" name="stream_name" id="stream_name" value='${param.id}'/>
-                <input type="text" class="form-control" id="new_stream_name" name ="new_stream_name" value="${param.id}" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,20}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 3 than 20 characters." required>
+                <input type="text" class="form-control" id="new_stream_name" onchange="myFunction()" name ="new_stream_name" value="${param.id}" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,20}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 3 than 20 characters." required>
+                <div><small id="jackson_1" class="text-danger"></small></div>
               </div>
             </div>
 
@@ -131,3 +133,20 @@ boolean streamCantBeDeleted = rs.next();
 
 </body>
 </html>
+
+<script>
+function myFunction()
+{
+  var sName = document.getElementById("new_stream_name").value;
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("jackson_1").innerHTML = this.responseText;
+    }
+  };
+  
+  xhttp.open("GET", "jackson_1.htm?streamName="+sName+"&num=2", true);
+  xhttp.send();
+}
+</script>

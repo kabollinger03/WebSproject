@@ -1,0 +1,369 @@
+{
+  "id": "86f969f8-c4c1-4325-bd4b-71bb4f2e444c",
+  "version": "2.0",
+  "name": "WebSProject",
+  "url": "http://localhost:26217/WebSproject/login.htm",
+  "tests": [{
+    "id": "1bb7bb0e-c2cc-4519-93da-0f0cbb4a4c08",
+    "name": "Admin Login Success does have instructor tab",
+    "commands": [{
+      "id": "66200355-34c0-4d9b-85eb-943e70840612",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:26217/WebSproject/login.htm",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "509dde60-b89b-4b0f-b9ae-b70674aa23c7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "784x726",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "647c3201-d71c-432c-9209-813f6a4a4c5f",
+      "comment": "",
+      "command": "click",
+      "target": "name=userName",
+      "targets": [
+        ["name=userName", "name"],
+        ["css=#login-form > .mb-3 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='userName']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3463e491-d694-46b6-aa6a-0543e4e9d9be",
+      "comment": "",
+      "command": "type",
+      "target": "name=userName",
+      "targets": [
+        ["name=userName", "name"],
+        ["css=#login-form > .mb-3 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='userName']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "AD2@syntelinc.com"
+    }, {
+      "id": "9eeecff8-4ac1-4117-898f-1a65306f35d8",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.mb-2 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8229c2ac-0381-4f90-b04b-372feb56bac7",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.mb-2 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "is"
+    }, {
+      "id": "c81b9a18-de0a-413a-b21a-4b2a4a21cd49",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(4) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(4) > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "93135e2c-ccf4-44d4-8c40-5db83247aa0e",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.fa-rocket",
+      "targets": [
+        ["css=.fa-rocket", "css:finder"],
+        ["xpath=//i", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "59e43f25-0f5c-4ae4-91f5-dd17e80b7b62",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=Admin",
+      "targets": [
+        ["linkText=Instructor", "linkText"],
+        ["css=.navbar-nav > .nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Instructor')]", "xpath:link"],
+        ["xpath=//div[@id='navbarNav']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'createclass.htm')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Instructor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f031aa94-9778-4f4e-851c-d0a5dcd08fbc",
+    "name": "Instructor Login Success does not have admin tab",
+    "commands": [{
+      "id": "a57af4ba-8dcb-4f47-a91d-42940557fd0e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:26217/WebSproject/login.htm",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "53121f73-197c-4c21-a66b-678dccba9a5d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "784x726",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "771ac695-f939-4f85-ae26-2657a31dc1fe",
+      "comment": "",
+      "command": "click",
+      "target": "name=userName",
+      "targets": [
+        ["name=userName", "name"],
+        ["css=#login-form > .mb-3 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='userName']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3da1b847-70f2-412e-b106-4ccce2ef8102",
+      "comment": "",
+      "command": "type",
+      "target": "name=userName",
+      "targets": [
+        ["name=userName", "name"],
+        ["css=#login-form > .mb-3 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='userName']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "IN1@syntelinc.com"
+    }, {
+      "id": "1f1181da-a05a-4c4f-bf7b-9fa43b9f2032",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.mb-2 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca10b870-d963-45f6-a9be-5b33a8d4d6b6",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.mb-2 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "KB1234"
+    }, {
+      "id": "74a7adcc-1b57-405e-9019-82cabd050541",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(4) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(4) > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1487e21-cde6-44de-9e22-429907a36de4",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.fa-rocket",
+      "targets": [
+        ["css=.fa-rocket", "css:finder"],
+        ["xpath=//i", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "7baef4c6-bf41-4b89-83b6-193b8ce4e654",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "linkText=Admin",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "ab2c5674-1844-416c-aa77-77a821d4c66d",
+    "name": "Admin retains view switcher",
+    "commands": [{
+      "id": "8ed694cd-7be0-44d5-8ebb-51a654b1d482",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:26217/WebSproject/login.htm",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c6b1872e-6167-4e9b-b1bd-36e76a9840a7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "784x726",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1077c07b-df3d-4ca1-b4cb-86d3a17b942b",
+      "comment": "",
+      "command": "click",
+      "target": "name=userName",
+      "targets": [
+        ["name=userName", "name"],
+        ["css=#login-form > .mb-3 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='userName']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "209df8c7-8437-4221-b8f4-8e19084246d6",
+      "comment": "",
+      "command": "type",
+      "target": "name=userName",
+      "targets": [
+        ["name=userName", "name"],
+        ["css=#login-form > .mb-3 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='userName']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "AD2@syntelinc.com"
+    }, {
+      "id": "84c9dfc5-1b3a-43e0-9e2f-9a44d717c7a4",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.mb-2 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ee37770-8784-4d81-a86b-ad41ed24ab6a",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.mb-2 > .form-control-lg", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "is"
+    }, {
+      "id": "69a0ab92-88cd-42c3-ad2e-eb07acee6b04",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(4) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(4) > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='login-form']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d32ecb02-da9d-405d-ae6a-47c33653986c",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.fa-rocket",
+      "targets": [
+        ["css=.fa-rocket", "css:finder"],
+        ["xpath=//i", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "392ad9cc-f454-495e-a2a5-23d6bdd01122",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=Admin",
+      "targets": [
+        ["linkText=Instructor", "linkText"],
+        ["css=.navbar-nav > .nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Instructor')]", "xpath:link"],
+        ["xpath=//div[@id='navbarNav']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'createclass.htm')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Instructor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a46e3caf-4b26-4025-972f-049e354cd532",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Instructor",
+      "targets": [
+        ["linkText=Instructor", "linkText"],
+        ["css=.navbar-nav > .nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Instructor')]", "xpath:link"],
+        ["xpath=//div[@id='navbarNav']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'createclass.htm')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Instructor')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "87b7a830-6dd7-4cce-bcfb-9dadbc942697",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=Admin",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "07062574-e00c-445c-bc2c-fb465f2db7e8",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }, {
+    "id": "c650db82-8065-4525-8cab-add3b7c834bd",
+    "name": "Login Basics",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["f031aa94-9778-4f4e-851c-d0a5dcd08fbc", "1bb7bb0e-c2cc-4519-93da-0f0cbb4a4c08"]
+  }, {
+    "id": "eed0255d-734b-4b1c-8ded-e2425d171f59",
+    "name": "Admin Actions",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["ab2c5674-1844-416c-aa77-77a821d4c66d"]
+  }],
+  "urls": ["http://localhost:26217/WebSproject", "http://localhost:26217/WebSproject/login.htm"],
+  "plugins": []
+}

@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*" %>
 
 <%  
+    
   //initialize driver class
   try {    
     Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -30,13 +31,18 @@
   String modCategory = request.getParameter("cat"); 
   String streamName= request.getParameter("streamName");
   int id = Integer.parseInt(request.getParameter("moduleId"));
-  out.println(modCategory);
   String streamId="";
   String modCategoryId = " ";
   
   //insert
   
-  
+  String sql2;
+  sql2 = "select module_name from modules where module_name='" + moduleName + "' and module_id!=" + 
+          id;
+  rs = stmt.executeQuery(sql2);
+ 
+  if(rs.next() == false)
+  {
    try {
             sql = "Select Category_Id from Category where Category_name = '" + modCategory + "'";
             rs = stmt.executeQuery(sql);
@@ -61,7 +67,8 @@
         } catch (SQLException e) {
            out.println("Error encountered during row update for users: " + e.toString() + "<BR>");
        }
-       
+  }
+  
   stmt.close();
   conn.commit();
   

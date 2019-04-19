@@ -35,7 +35,17 @@
   String cat_name_original = request.getParameter("category_name");
  
 
+  ResultSet rs;
+  String sql2;
   
+    sql2 = "select category_name from category where category_name='" + cat_name_new + "'";
+  
+  rs = stmt.executeQuery(sql2);
+  
+  
+  //insert
+  if(rs.next() == false)
+  {
   //insert
    try {
     
@@ -46,7 +56,7 @@
         } catch (SQLException e) {
         out.println("Error encountered during update for stream: " + e.toString() + "<BR>");
         }
-   
+  }
   
   stmt.close();
 

@@ -39,8 +39,17 @@
   //String passWord = request.getParameter("password");
   //String admin = request.getParameter("isadmin");
 
+  ResultSet rs;
+  String sql2;
+  
+    sql2 = "select stream_name from stream where stream_name='" + stream_name_new + "'";
+  
+  rs = stmt.executeQuery(sql2);
+  
   
   //insert
+  if(rs.next() == false)
+  {
    try {
     
         sql = "UPDATE stream SET stream_name = '"+stream_name_new+"' WHERE stream_name = '"+stream_name_original+"'";
@@ -50,7 +59,7 @@
         } catch (SQLException e) {
         out.println("Error encountered during update for stream: " + e.toString() + "<BR>");
         }
-   
+  }
   
   // select
   /*sql = "select user_id from users";

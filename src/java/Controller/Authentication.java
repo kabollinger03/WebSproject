@@ -49,10 +49,19 @@ public class Authentication extends SimpleFormController{
             if (userMatcher.getPassword().trim().equals(user.getPassword().trim())) {
                 
                 if (userMatcher.isAdmin()) {
-                    return new ModelAndView("streams");
+
+                    ModelAndView userNameAndStatus = new ModelAndView("streams");
+                    userNameAndStatus.addObject("username", userMatcher.getUserName());
+                    userNameAndStatus.addObject("isAdmin", "Yes");
+                    return userNameAndStatus;
                 }
                 else
-                    return new ModelAndView("instructor");
+                {
+                    ModelAndView userNameAndStatus = new ModelAndView("instructor");
+                    userNameAndStatus.addObject("username", userMatcher.getUserName());
+                    userNameAndStatus.addObject("isAdmin", "No");
+                    return userNameAndStatus;
+                }
             }
             else {
                 System.out.println("password did not match one in the DB");
