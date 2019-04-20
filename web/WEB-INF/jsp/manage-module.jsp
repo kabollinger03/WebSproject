@@ -167,7 +167,7 @@ boolean moduleCanBeDeleted = rs.next();
             <div class="row justify-content-center mt-1">
               <div class="row pt-3">
                 <div class="col-6">
-                  <button class="btn btn-sm btn-secondary" type="submit">
+                  <button class="btn btn-sm ghost" type="submit">
                       <span style="white-space: nowrap;"><i class="fas fa-user-edit"></i> Update </span>
                   </button>
                 </div>
@@ -206,7 +206,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?modName="+modName+"&modId="+modId+"&num=1", true);
+  xhttp.open("GET", "jackson_1.htm?modName="+encodeURIComponent(modName)+"&modId="+encodeURIComponent(modId)+"&num=1", true);
   xhttp.send();
 }
 </script>

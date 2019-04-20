@@ -104,7 +104,7 @@
           <div class="form">
             <div class="form-row">
               <div class="col-2">
-                <button class="btn btn-sm mt-1 btn-primary no-border" onclick="checkDomain();" type="submit"><i class="fas fa-plus pr-2"></i>Insert User</button>
+                <button class="btn btn-small btn-success no-border" onclick="return checkDomain();" type="submit"><i class="fas fa-plus pr-2"></i>Insert User</button>
               </div>
               <div class="col-6">
                 <input type="email" class="form-control" id="username" onChange="myFunction()" name="username"  placeholder="Email" pattern="[a-zA-Z][a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be a valid atos or syntel email" required>

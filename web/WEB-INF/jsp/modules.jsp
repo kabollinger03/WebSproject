@@ -197,7 +197,7 @@
           <div class="form">
             <div class="form-row">
               <div class="col-2">
-                  <button class="btn btn-sm btn-primary mt-1 no-border" type="submit"><i class="fas fa-plus pr-2"></i>Insert Module</button>
+                  <button class="btn btn-small btn-success no-border" type="submit"><small><i class="fas fa-plus pr-2"></i>Insert Module</small></button>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="modName" onchange="myFunction()" name="modName" placeholder="Module Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,45}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 2 and 45 characters." required>
@@ -283,7 +283,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?name="+modName+"&num=6", true);
+  xhttp.open("GET", "jackson_1.htm?name="+encodeURIComponent(modName)+"&num=6", true);
   xhttp.send();
 }
 </script>

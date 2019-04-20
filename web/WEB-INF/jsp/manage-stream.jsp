@@ -108,8 +108,8 @@ boolean streamCantBeDeleted = rs.next();
             <div class="row justify-content-center mt-1">
               <div class="row pt-3">
                 <div class="col-6">
-                    <button class="btn btn-sm btn-secondary" type="submit">
-                      <span style="white-space: nowrap;"><i class="fas fa-user-edit"></i> Update </span>
+                    <button class="btn btn-sm ghost" type="submit">
+                      <span style="white-space: nowrap;"><small><i class="fas fa-user-edit"></i> Update </small></span>
                     </button>
                 </div>
               </div>
@@ -146,7 +146,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?streamName="+sName+"&num=2", true);
+  xhttp.open("GET", "jackson_1.htm?streamName="+encodeURIComponent(sName)+"&num=2", true);
   xhttp.send();
 }
 </script>

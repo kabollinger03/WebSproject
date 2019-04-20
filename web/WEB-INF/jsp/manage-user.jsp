@@ -120,7 +120,7 @@ boolean userCantBeUpdated = rs.next();
             <div class="row justify-content-center mt-1">
               <div class="row pt-3">
                 <div class="col-6">
-                    <button class="btn btn-sm btn-secondary" type="submit">
+                    <button class="btn btn-sm ghost" type="submit">
                       <span style="white-space: nowrap;"><i class="fas fa-user-edit"></i> Update </span>
                     </button>
                 </div>
@@ -159,7 +159,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?oldUn="+oName+"&newUn="+nName+"&num=5", true);
+  xhttp.open("GET", "jackson_1.htm?oldUn="+encodeURIComponent(oName)+"&newUn="+encodeURIComponent(nName)+"&num=5", true);
   xhttp.send();
 }
 </script>

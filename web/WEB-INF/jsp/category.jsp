@@ -118,8 +118,9 @@
           <div class="form">
             <div class="form-row">
               <div class="col-lg-2">
-                <button class="btn btn-sm btn-primary mt-1 no-border" type="submit"><i class="fas fa-plus pr-2"></i>Insert Category</button>
+                <button class="btn btn-small btn-success no-border" type="submit"><small><i class="fas fa-plus pr-2"></i>Insert Category</small></button>
               </div>
+              <div class="col-lg-10">
                <input type="text" class="form-control" id ="CategoryName" onChange="myFunction()" name="categoryName" placeholder="Category Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,20}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 3 and 45 characters." required>
               <div><small id="jackson_1" class="text-danger"></small></div>
               </div>
@@ -177,8 +178,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?name="+catName+"&num=9", true);
+  xhttp.open("GET", "jackson_1.htm?name="+encodeURIComponent(catName)+"&num=9", true);
   xhttp.send();
 }
 </script>
-

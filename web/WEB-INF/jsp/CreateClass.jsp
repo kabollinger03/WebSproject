@@ -7,10 +7,10 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!--database access-->
-<%          
+<%
+           
    //initialize driver class
     try {    
       Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -82,7 +82,38 @@
     </head>
     <body class="bg-light">
         <!-- Navbar -->
-         <jsp:include page="nav.jsp"/>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-rocket"></i>
+                    <!--<img width="30" height="30" position="inline-block" src="img/rocket-ship.png"/>-->
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                  
+                        <li class="nav-item">
+                            <a class="nav-link" href="createclass.htm">Instructor</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-md-none d-lg-block">
+                        <div class="btn-group mr-3">
+                            <button style="color: #fff;" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <small> <i class="fas fa-user pr-1"></i></small>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#"><small><i class="fas fa-lock pr-2"></i>Change Password</small></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="login.htm"><small>Logout</small></a>
+                            </div>
+                        </div>
+                    </ul>
+
+                </div>
+            </div><!-- /Container -->
+        </nav>
         <!-- End Navbar -->
         
         <div class="container-fluid">
@@ -115,7 +146,7 @@
             <div class="container pb-5 pt-4">
                 <div class="row mx-1">
                     <div class="col-8 px-3 py-3">
-                        <s:form commandName="excel" enctype="multipart/form-data" method="POST">
+                        <s:form commandName="excel">
                             <Table class="table">
                                 <tr class="my-2">
                                    
@@ -134,50 +165,42 @@
                                 </tr>
                                 <tr class="my-2">
                                     <td> Location:</td>
-                                    <td><input type="text" name="location" class="form-control" pattern="[a-zA-Z][a-zA-Z]{2,50}" title="Location must contain only letters and be atleast 3 characters." required/></td>
+                                    <td><input type="text" name="location" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                     <td>Site</td>
-                                    <td>
-                                        <div class="col-4">
-                                            <div class="form-group pt-lg-2 pl-lg-2">
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="onSite" name="site" value="Onsite" checked>
-                                                        <label class="custom-control-label" for="onSite"><small>Onsite</small></label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="offSite" name="site" value="Offshore">
-                                                        <label class="custom-control-label" for="offSite"><small>Offshore</small></label>
-                                                </div> 
-                                            </div>
-                                        </div>
+                                    <td><select name="site" class="form-control">
+                                        <option value="">Select</option>
+                                        <option  id="offSite" value="CHI">CHI</option>
+                                        <option  id="onSite" value="OPA">OPA</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Instructor Email:</td>
-                                    <td><input type="email" name="insEmail" id="insEmail" class="form-control" pattern="[a-zA-Z][a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be a valid atos or syntel email" required/></td>
+                                    <td><input type="email" name="insEmail" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                  <tr>
                                     <td>Start Date:</td>
-                                    <td><input type="date" name="startDate" id="startDate" class="form-control" required/></td>
+                                    <td><input type="date" name="startDate" class="form-control"/></td>
                                 </tr>
                                  <tr>
                                     <td>End Date:</td>
-                                    <td><input type="date" name="endDate" id="endDate" class="form-control" required/></td>
+                                    <td><input type="date" name="endDate" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                 <tr>   
                                     <td>Upload Excel</td>
                                     <td>  
-                                            <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ID="file" name="file" runat="server" title="Uploaded file must be an excel" required/>
+                                            <input type="file" name="file" style=""/>
                                             <label class="custom-file-input">Choose file...</label>
                                     </td>
                                     <td></td>
                                 </tr>
                             </Table>
                             <div class="row justify-content-center">
-                                <input type="submit" value="Submit" class="btn btn-success px-3" onclick="validate();"/>
+                                <input type="submit" value="Submit" class="btn btn-success px-3"/>
                             </div>
                         </s:form>
                     </div><!-- End col 8 -->
@@ -201,8 +224,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <!-- Bootstrap.js -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-         <script src="<c:url value="/resources/js/classValidate.js" />"></script>
     </body>
 </html>
 

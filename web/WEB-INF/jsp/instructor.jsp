@@ -5,9 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% session.setAttribute("username", request.getAttribute("username"));
-   session.setAttribute("isAdmin", request.getAttribute("isAdmin"));
-%>
 <% response.sendRedirect("createclass.htm"); %>
 <%--
 <!DOCTYPE html>

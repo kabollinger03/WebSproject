@@ -6,7 +6,8 @@
 
 <%
   
-   try {    
+  //initialize driver class
+  try {    
     Class.forName("oracle.jdbc.driver.OracleDriver");
   } catch (Exception e) {
     out.println("Fail to initialize Oracle JDBC driver: " + e.toString() + "<P>");
@@ -43,7 +44,7 @@
   
   
   // select
-  sql = "select c.course_name as course, s.stream_name as stream, m.module_name as module from courses c, modules m, stream s where c.module_id = m.module_id AND s.stream_id=m.stream_id";
+  sql = "select c.course_name as course, m.module_name as module from courses c, modules m where c.module_id = m.module_id ";
   rs = stmt.executeQuery(sql);
   
   ArrayList courseList = new ArrayList();
@@ -52,36 +53,16 @@
   ArrayList modList = new ArrayList();
   request.setAttribute("modList", modList);
   
-  ArrayList streamList = new ArrayList();
-  request.setAttribute("streamList", streamList);
-  
  
   
   while (rs.next()) {
         courseList.add(rs.getString("course"));
-        streamList.add(rs.getString("stream"));
         modList.add(rs.getString("module"));
-        
         //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
         } // End while 
   
-  sql = "select stream_name from stream";
-  rs = stmt.executeQuery(sql);
   
-  ArrayList fullstreamList = new ArrayList();
-  request.setAttribute("fullstreamList", fullstreamList);
-  
- 
-  
-  while (rs.next()) {
-        fullstreamList.add(rs.getString("stream_name"));
-        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
-        }
-  String var = (String)request.getAttribute("stream_name");
-
-  //out.println(var);
-
-  sql = "select m.module_name from modules m, stream s where m.stream_id=s.stream_id AND stream_name LIKE '"+var+"'";
+  sql = "select module_name from modules";
   rs = stmt.executeQuery(sql);
   
   ArrayList fullmodList = new ArrayList();
@@ -92,9 +73,7 @@
   while (rs.next()) {
         fullmodList.add(rs.getString("module_name"));
         //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
-        }
-  
-// End while 
+        } // End while 
    //out.println(courseList.get(0));
  
   // delete
@@ -115,9 +94,10 @@
   
   //disconnect
   conn.close();
+  
 %>  
 
-<body class="bg-light" onload="loadDoc()">
+<body class="bg-light">
 
   <jsp:include page="nav.jsp"/>
   <div class="container-fluid">
@@ -163,31 +143,20 @@
             <div class="form">
               <div class="form-row">
                 <div class="col-lg-2">
-                  <button class="btn btn-sm btn-primary mt-1 no-border" type="submit"><i class="fas fa-plus pr-2"></i>Insert Course</button>
+                  <button class="btn btn-sm btn-primary mt-1 no-border" type="submit"><small><i class="fas fa-plus pr-2"></i>Insert Course</small></button>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                   <input type="text" name="coursename" id="coursename" class="form-control" onChange="myFunction()" placeholder="Course Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{0,45}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 1 and 45 characters." required>
                 <div><small id="jackson_1" class="text-danger"></small></div>
                 </div>
-                  <div class="form-group col-md-3">
-                      <select class="custom-select" name= "streamname" id="streamname" onchange="loadDoc()">
-                    <c:forEach items="${fullstreamList}" var="streamer">
-                        <option value="${streamer}">
-                            ${streamer}
-                        </option>
-                    </c:forEach>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                  <div id="dropdown_stuff">
-                        <select class="custom-select" name= "modulename" id="modulename">
+                <div class="form-group col-md-5">
+                  <select class="custom-select" name= "modulename" id="modulename">
                     <c:forEach items="${fullmodList}" var="modder">
                         <option value="${modder}">
                             ${modder}
                         </option>
                     </c:forEach>
                     </select>
-                    </div>
                 </div>
               </div>
             </div>
@@ -200,7 +169,6 @@
           <tr>
             <th scope="col" style="width: 10%;">#</th>
             <th scope="col">Course Name</th>
-            <th scope="col">Stream Name</th>
             <th scope="col">Module Name</th>
           </tr>
         </thead>
@@ -210,10 +178,7 @@
            <tr value="${course}">
                <th scope="row">${count}</th>
                <td>
-                   <a href="manage-course.htm?id=${course}&name=${streamList.get(count-1)}&name2=${modList.get(count-1)}">${course}</a>
-               </td>
-               <td>
-                ${streamList.get(count-1)}
+                   <a href="manage-course.htm?id=${courseList.get(count-1)}&module=${modList.get(count-1)}">${course}</a>
                </td>
                <td>
                ${modList.get(count-1)}
@@ -228,22 +193,6 @@
   <!-- /Tabs -->
 
   <!-- Optional JavaScript -->
-  <script>
-    function loadDoc() {
-      var xhttp = new XMLHttpRequest();
-      
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-         document.getElementById("dropdown_stuff").innerHTML = this.responseText;
-        }
-      };
-      
-      var okay = document.getElementById("streamname").value;
-      //alert("Value= "+okay);
-      xhttp.open("GET", "ajax.htm?id="+okay, true);
-      xhttp.send();
-    }
-</script>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -267,7 +216,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?name="+cName+"&num=8", true);
+  xhttp.open("GET", "jackson_1.htm?name="+encodeURIComponent(cName)+"&num=8", true);
   xhttp.send();
 }
 </script>

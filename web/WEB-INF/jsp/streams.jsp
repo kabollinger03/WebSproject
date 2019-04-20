@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*" %>
 
 <%
-  session.setAttribute("username", request.getAttribute("username"));
+  
   
   //initialize driver class
   try {    
@@ -114,7 +114,7 @@
           <div class="form">
             <div class="form-row">
               <div class="col-lg-2">
-                <button class="btn btn-sm btn-primary no-border mt-1" type="submit"><i class="fas fa-plus pr-2"></i>Insert Stream</button>
+                <button class="btn btn-sm btn-primary no-border mt-1" type="submit""><small><i class="fas fa-plus pr-2"></i>Insert Stream</small></button>
               </div>
               <div class="col-lg-10">
                <input type="text" class="form-control" id ="streamName" onchange="myFunction()" name="streamName" placeholder="Stream Name" pattern="[a-zA-Z][a-zA-Z0-9-_.+#* ]{2,50}" title="Name must start with a letter and can only contain letters, numbers, hyphens, underscores, periods, hashtag, plus, star and be between 3 and 50 characters." required>
@@ -174,7 +174,7 @@ function myFunction()
     }
   };
   
-  xhttp.open("GET", "jackson_1.htm?name="+sName+"&num=7", true);
+  xhttp.open("GET", "jackson_1.htm?name="+encodeURIComponent(sName)+"&num=7", true);
   xhttp.send();
 }
 </script>
