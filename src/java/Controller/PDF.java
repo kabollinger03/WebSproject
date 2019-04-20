@@ -17,7 +17,7 @@ import rst.pdfbox.layout.text.Alignment;
 import rst.pdfbox.layout.text.BaseFont;
 
 public class PDF {
-    
+    public static String id;
     private static DataSource dataSource;
     private NamedParameterJdbcTemplate njdbc;
 
@@ -41,6 +41,12 @@ public class PDF {
    
     public void setPdfinfo(PDFinfo pdfinfo) {
         this.pdfinfo = pdfinfo;
+    }
+    public void setId(String id){
+        this.id = id;
+    }
+    public String getId(){
+        return id;
     }
 
     public PDFinfo getPdfinfo() {
@@ -79,8 +85,9 @@ public class PDF {
 		this.filePath = filePath;
 	}
     
-	public void generate(String empid) throws Exception{ //empid not implemented yet, should be able to get everything you will need from it
+	public String generate(String empid) throws Exception{ //empid not implemented yet, should be able to get everything you will need from it
         //define output vars
+        id=empid;
         ArrayList<String> stream = new ArrayList();
         ArrayList<String> foundations = new ArrayList();
         ArrayList<String> specializations = new ArrayList();
@@ -95,7 +102,7 @@ public class PDF {
         
         if(!info.getAllIds().contains(empid)){ //this is O(n^2) methinks. make the query return one think and do bool return.
             System.out.println("Employee ID not found. PDF has not been generated.");
-            return;
+            return("");
         }
 
         //populate output variables
@@ -187,9 +194,10 @@ public class PDF {
         document.add(new VerticalSpacer(linspace));
         
         final OutputStream outputStream = new FileOutputStream(
-		filePath + empid + ".pdf");
+		empid + ".pdf");
         document.save(outputStream);
-    
+        outputStream.close();
+        return(empid+".pdf");
         //BarChartEx bc = new BarChartEx();
 	}	
 }

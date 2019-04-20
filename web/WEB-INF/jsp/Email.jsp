@@ -166,10 +166,12 @@
               <!--</div>-->
                 </tbody>
             </table>
+            <input type="checkbox" name="isPreview"> Preview?<br>
             <div class="row justify-content-center">
               <button type="submit" value="Login" class="btn btn-success mx-1"><i class="fas fa-reply pr-2"></i>Send</button>
               <button type="reset" value="Reset" class="btn-info btn mx-1"><i class="fas fa-sync-alt pr-2"></i>Reset</button>
             </div>
+            
               </s:form>
         </div>
     </div>

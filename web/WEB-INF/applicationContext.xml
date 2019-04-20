@@ -20,7 +20,8 @@
     p:password="${jdbc.password}" />
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
-
+    <bean id = "pdf2" class="Controller.PDF">
+    </bean>
    <bean id = "user1" class="POJO.UserServiceDAO">
        <property name = "dataSource" ref = "dataSource" />
    </bean>

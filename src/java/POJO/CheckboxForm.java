@@ -11,6 +11,15 @@ package POJO;
  */
 public class CheckboxForm {
     String []userNames;
+    boolean isPreview;
+
+    public void setIsPreview(boolean isPreview) {
+        this.isPreview = isPreview;
+    }
+
+    public boolean isPreview() {
+        return isPreview;
+    }
 
     public CheckboxForm() {
     }    

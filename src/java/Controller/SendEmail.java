@@ -85,7 +85,7 @@ public class SendEmail {
 
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            String path = "C:/Users/syntel/Music/" + id + ".pdf";
+            String path = id+".pdf";
             String filename = id + ".pdf";
             DataSource source = new FileDataSource(path);
             messageBodyPart.setDataHandler(new DataHandler(source));
@@ -159,10 +159,9 @@ public class SendEmail {
             multipart.addBodyPart(messageBodyPart);
             // Send the complete message parts
            // message.setContent(multipart);
-            System.out.println(System.getProperty("user.dir"));
+            System.out.println(System.getProperty("user.dir")+"aAS:DKLJF:KLJ");
             messageBodyPart = new MimeBodyPart();
-            DataSource fds2 = new FileDataSource(
-            "welcome.jpg");
+            DataSource fds2 = new FileDataSource("welcome.jpg");
             messageBodyPart.setDataHandler(new DataHandler(fds2));
             messageBodyPart.setHeader("Content-ID", "<congrats>");
             multipart.addBodyPart(messageBodyPart);
