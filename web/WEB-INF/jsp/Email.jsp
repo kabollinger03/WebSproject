@@ -33,7 +33,7 @@
   ResultSet rs;
   
   // select
-  sql = "select email, name from employees";
+  sql = "SELECT email, name, employee_id FROM employees";
   rs = stmt.executeQuery(sql);
   
   ArrayList usersList = new ArrayList();
@@ -41,11 +41,14 @@
   ArrayList nameList = new ArrayList();
   request.setAttribute("nameList", nameList);
   
+  ArrayList employeeIDs = new ArrayList();
+  request.setAttribute("employeeIDs", employeeIDs);
+  
   while (rs.next()) {
         usersList.add(rs.getString("email"));
         nameList.add(rs.getString("name"));
-        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
-        } // End while 
+        employeeIDs.add(rs.getString("employee_id"));
+  }
   
    out.println("<P>");
   
@@ -159,6 +162,11 @@
                       <tr>
                         <td class="noto">${nameList[loop.index]}</td>
                         <td class="noto">${user}</td>
+                        <td class="noto">
+                            <a href="pdfviewer.htm?empID=${employeeIDs[loop.index]}" target="_blank"rel="noreferrer">
+                                ${employeeIDs[loop.index]}
+                            </a>
+                        </td>
                         <td class="text-center noto"><s:checkbox path="userNames" value="${user}" /></td>
                       </tr>
 

@@ -3,6 +3,7 @@
 
  <%
      String s = PDF.id+".pdf";
+     
      %>
 <!DOCTYPE html>
 
@@ -27,9 +28,11 @@
 <body class="bg-light">
         <div>
             
-            <embed src="<%=s %>" width="100%" height="900" 
+            <embed src="${employeeID}.pdf" width="100%" height="900" 
             type="application/pdf">
         </div>
+            <h1>${employeeID}</h1>
+            
             <form>
             <div class="row justify-content-center">
               <button type="submit" value="Login" class="btn btn-success mx-1"><i class="fas fa-reply pr-2"></i>Send</button>
