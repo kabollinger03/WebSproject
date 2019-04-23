@@ -34,6 +34,6 @@ public class PdfViewController implements Controller {
             ex.printStackTrace();
         }
         
-        return new ModelAndView("pdfviewer", "employeeID", employeeID);
+        return new ModelAndView("pdf-preview", "employeeID", employeeID);
     } 
 }
