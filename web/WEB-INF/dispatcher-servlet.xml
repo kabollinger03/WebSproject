@@ -45,6 +45,8 @@
                 <prop key="forbidden.htm">forbiddenController</prop>
                 <prop key="reset-password.htm">resetController</prop>
                 
+                <prop key="pdf-preview.htm">pdfViewController</prop>
+                
                 <!--all admin pages should use the adminController-->             
                 <prop key="admin.htm">adminController</prop>
       
@@ -138,6 +140,10 @@
 
     <bean id="forbiddenController"
         class="Controller.ForbiddenController"
+    />
+    
+    <bean id="pdfViewController"
+        class="Controller.PdfViewController"
     />
     
 </beans>

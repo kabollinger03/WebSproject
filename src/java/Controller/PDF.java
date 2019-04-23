@@ -48,7 +48,7 @@ public class PDF {
     private PDFinfo pdfinfo;
 
 	private String filePath = "C:/Users/syntel/Music/"; //use getfilepath in the email logic?
-    private final static String imagePath = "C:\\trainingkb\\WebSproject\\web\\resources\\img\\pdf_banner.png"; //path to AS logo
+    private final static String imagePath = "C:\\Chris\\Projects\\Redos\\WebSproject\\web\\resources\\img\\pdf_banner.png"; //path to AS logo
 
     //java.io.File.separator
     public PDF(){this.dataset = new DefaultCategoryDataset();}

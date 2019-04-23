@@ -34,20 +34,23 @@
   ResultSet rs;
   
   // select
-  sql = "select email, name from employees";
+  sql = "select email, name, employee_id from employees";
   rs = stmt.executeQuery(sql);
   
-  ArrayList usersList = new ArrayList();
+  ArrayList usersList = new ArrayList(); // emails
   request.setAttribute("usersList", usersList);
+  
   ArrayList nameList = new ArrayList();
   request.setAttribute("nameList", nameList);
+  
+  ArrayList employeeIDs =  new ArrayList();
+  request.setAttribute("employeeIDs", employeeIDs);
   
   while (rs.next()) {
         usersList.add(rs.getString("email"));
         nameList.add(rs.getString("name"));
-        //out.println("User Id = " + rs.getString("user_id") + "<BR>"); 
-        } // End while 
-  
+        employeeIDs.add(rs.getString("employee_id"));
+  }
   
   rs.close();
   stmt.close();
@@ -141,6 +144,11 @@
                       <tr>
                         <td class="noto">${user.employeeName}</td>
                         <td class="noto">${user.employeeEmail}</td>
+                        <td class="noto"> <!-- link to PDF preview for this employee's report -->
+                            <a href="pdf-preview.htm?empID=${employeeIDs[loop.index]}" target="_blank" rel="noreferrer">
+                                ${employeeIDs[loop.index]}
+                            </a>
+                        </td>
                         <td class="text-center noto"><input class="cb" type="checkbox" name="emailChecked" value="${user.employeeEmail}" /></td>
                       </tr>
                   </c:forEach>
