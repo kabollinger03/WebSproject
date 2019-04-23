@@ -48,7 +48,7 @@ public class PDF {
     private PDFinfo pdfinfo;
 
 	private String filePath = "C:/Users/syntel/Music/"; //use getfilepath in the email logic?
-    private final static String imagePath = "C:\\trainingkb\\WebSproject\\web\\resources\\img\\pdf_banner.png"; //path to AS logo
+    private final static String imagePath = "C:\\Examples\\WebSproject\\web\\resources\\img\\pdf_banner.png"; //path to AS logo
 
     //java.io.File.separator
     public PDF(){this.dataset = new DefaultCategoryDataset();}
@@ -147,7 +147,7 @@ public class PDF {
         document.add(new VerticalSpacer(90));
               
         
-        document.add(new ImageElement("performica.png"), new VerticalLayoutHint(Alignment.Left, 0, 0,
+        document.add(new ImageElement("C:\\Examples\\WebSproject\\src\\java\\Controller\\performica.png"), new VerticalLayoutHint(Alignment.Left, 0, 0,
 		0, 0, true)); 
         document.add(new VerticalSpacer(50)); //font: Vivaldi
    
@@ -248,7 +248,7 @@ public class PDF {
         document.add(new VerticalSpacer(linspace));
         document.add(par);
         
-        final OutputStream outputStream = new FileOutputStream(empid + ".pdf");
+        final OutputStream outputStream = new FileOutputStream(filePath + empid + ".pdf");
         document.save(outputStream);
 
 	}	

@@ -44,7 +44,7 @@ public class ExcelPuller {
                         currentCell = cellIterator.next();
                     }
                     
-                    System.out.println(currentCell.getStringCellValue());
+                    
                     /** Iterates through the first row, and retrieves all the column.
                      * Columns should be in order (Sutdent_ID, Name, Email, first Module ID, second Module ID, ...)
                      * Saves the column names in an array list to use as a reference later. 

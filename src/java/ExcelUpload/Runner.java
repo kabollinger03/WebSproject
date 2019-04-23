@@ -15,6 +15,7 @@ public class Runner {
     
     public static ArrayList<Employee> ExcelUpload(File FILE_PATH, String loc, String site, String stream, String insEmail, String startDate, String endDate) throws IOException, ParseException {
         
+        PassOrFail pof = new PassOrFail();
         ExcelPuller pul = new ExcelPuller();
         ArrayList<Employee> emps = new ArrayList<>();
         EmployeeCRUD empCrud = new EmployeeCRUD();
@@ -34,19 +35,25 @@ public class Runner {
       
                 //Iterates through the created employees to upload their data
         	for(Employee x: emps) {
-            	
-                  boolean inserted =  empCrud.insertEmployee(st, x.getEmployeeID(), x.getEmployeeName(), x.getEmployeeEmail(), x.getClassID(), x.getManagerID());
-                    if(inserted == false){
+                  
+                 ArrayList<Module> finalScores = new ArrayList<>();
+                 finalScores = pof.passingOrFailing(x);
+                  
+                  if (finalScores != null){
+                      boolean inserted =  empCrud.insertEmployee(st, x.getEmployeeID(), x.getEmployeeName(), x.getEmployeeEmail(), x.getClassID(), x.getManagerID());
+                      if(inserted == false){
                         empCrud.updateClass(st, x.getClassID(), x.getEmployeeID());
-                    }
-                   
-                    for(Module z: x.getModScores()) {
-                        eCrud.insertETM(st, z.getModuleID(), z.getmoduleScore(), x.getEmployeeID(), stream); //Uploads the scores from the list in the employees
-                    }
-        	}
+                      }
+                      for(Module z: finalScores) {
+                          eCrud.insertETM(st, z.getModuleID(), z.getmoduleScore(), x.getEmployeeID(), stream); //Uploads the scores from the list in the employees
+                      }
+                  } else{
+                      System.out.println("Employee" + x.getEmployeeName()+ "failed");
+                  }
+                }
                 con.close();
         } catch(ClassNotFoundException | SQLException e){
-        	e.printStackTrace();
+            e.printStackTrace();
         }
   
       return emps;

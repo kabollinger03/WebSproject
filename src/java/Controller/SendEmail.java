@@ -62,8 +62,9 @@ public class SendEmail {
                 message.addRecipient(Message.RecipientType.CC, new InternetAddress(cc));
             
             String[] startEndDates = getStartEnd(email);
+         
             message.setSubject("Performica Report["+ getStreamName(email) + "]["+ startEndDates[0] + "]-["+startEndDates[1]+"]");
-
+            System.out.println("here");
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
 

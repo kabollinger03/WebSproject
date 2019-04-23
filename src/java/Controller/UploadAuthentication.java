@@ -30,7 +30,9 @@ public class UploadAuthentication extends SimpleFormController {
         
       try{
         MultipartFile multiFile = excel.getFile();
+        System.out.println("Made it");
         File file = convert(multiFile);
+        System.out.println("Possibly made it");
   
         Runner.ExcelUpload(file, excel.getLocation(), excel.getSite(), excel.getStreamName(), excel.getInsEmail(), excel.getStartDate(), excel.getEndDate());
         // bring in all streams

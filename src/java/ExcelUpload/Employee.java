@@ -37,7 +37,7 @@ public class Employee {
 		this.employeeName = employeeName;
 	}
 	
-	public List<Module> getModScores() {
+	public ArrayList<Module> getModScores() {
 		return modScores;
 	}
 	
