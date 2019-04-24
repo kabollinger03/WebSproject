@@ -184,16 +184,20 @@
                                 <div class="form-group">
                                     <label for="editEmail">Employee Email: </label> 
                                     <input type="text" id="editEmail" name="editEmail" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                    <font color="red"><span id="eEmail"></span></font>
                                 </div>   
                                 <div class="form-group">
                                     <label for="editManagerID">Employee Manager ID: 
                                     </label> <input type="text" id="editManagerID" name="editManagerID" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                    <font color="red"><span id="eManager"></span></font>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button name="editModalButton" type="submit" id="editModalButton" class="btn btn-primary btn-primary">
+                                <button name="fakeEditModalButton" type="button" onclick="valid()" id="fakeEditModalButton" class="btn btn-primary btn-primary">
                                     Confirm Update
+                                </button>
+                                <button name="editModalButton" type="submit" style="display: none" id="editModalButton" class="btn btn-primary btn-primary">
                                 </button>
                             </div>
                         </form:form>
@@ -245,7 +249,40 @@
     </div>
 
     <!-- Optional JavaScript -->
-
+    <script>
+    function valid()
+    {
+        document.getElementById("eEmail").innerHTML = "";
+        //check email
+        var email = document.getElementById("editEmail").value;
+        email = email.toLowerCase();
+        email = email.split('@'); 
+        email = email[1];  
+        if(!(email === "syntelinc.com" || email === "atos.net"))
+        {    
+            document.getElementById("eEmail").innerHTML = "Not a valid Atos or Syntel email";
+            document.getElementById("editEmail").value = "";
+            return; 
+        }
+        
+        document.getElementById("eManager").innerHTML = "";
+        //check email
+        var email = document.getElementById("editManagerID").value;
+        email = email.toLowerCase();
+        email = email.split('@'); 
+        email = email[1];  
+        if(!(email === "syntelinc.com" || email === "atos.net"))
+        {    
+            document.getElementById("eManager").innerHTML = "Not a valid Atos or Syntel email";
+            document.getElementById("editManagerID").value = "";
+            return; 
+        }
+        
+         document.getElementById("editModalButton").click();
+    }
+    </script>
+    
+    
     <!-- Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <!-- Bootstrap.js -->
