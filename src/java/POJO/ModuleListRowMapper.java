@@ -6,6 +6,7 @@
 package POJO;
 
 import ExcelUpload.Module;
+import ExcelUpload.ModuleWithID;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,9 +16,10 @@ public class ModuleListRowMapper implements RowMapper{
 
     @Override
     public Module mapRow(ResultSet rs, int i) throws SQLException {
-        Module m = new Module();
-        m.setModuleID(rs.getString(1));
+        ModuleWithID m = new ModuleWithID();
+        m.setModuleName(rs.getString(1));
         m.setmoduleScore(rs.getDouble(2));
+        m.setModuleID(rs.getString(3));
         
         return m;
     }

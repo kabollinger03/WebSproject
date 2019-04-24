@@ -68,12 +68,14 @@ public class EmpController extends SimpleFormController {
     public ModelAndView editEmployee(String viewName, EmployeeServiceDAO esd, HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("showEmployees");
+        
         esd.updateEmployee(request.getParameter("editModalButton"), 
                 request.getParameter("editName").trim(), request.getParameter("editEmail").trim()
                 ,request.getParameter("editManagerID").trim());
         
         esd.updateEmployeeModule(request.getParameter("editModuleScore"), 
-               request.getParameter("editModalButton"), request.getParameter("selectModule"));
+               request.getParameter("editModalButton"), request.getParameter("selectModule"),
+               request.getParameter("editModuleID"));
         
         mav.addObject("emplist", esd.readAllEmployee());
        

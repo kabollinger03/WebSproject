@@ -10,9 +10,9 @@ public class Module {
 		this.moduleName = "N/A";
 		this.moduleScore = -1;
 	}
-	public Module(String moduleID, double moduleScore) {
+	public Module(String moduleName, double moduleScore) {
 		super();
-		this.moduleName = moduleID;
+		this.moduleName = moduleName;
 		this.moduleScore = moduleScore;
 	}
 

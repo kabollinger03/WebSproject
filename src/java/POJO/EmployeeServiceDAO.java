@@ -68,7 +68,7 @@ public class EmployeeServiceDAO implements EmployeeDAO{
     //Get arraylist of module for employee.
     public ArrayList<Module> getModuleIDAndScore(String id){
         ArrayList<Module> list = new ArrayList<>();
-        String sql = "select m.module_name, etm.scores from Employees e, "
+        String sql = "select m.module_name, etm.scores, m.module_id from Employees e, "
                 + "Modules m, Employees_take_Modules etm where e.employee_id = etm.employee_id "
                 + "AND etm.module_id = m.module_id AND e.employee_id = ?";
         
@@ -121,11 +121,10 @@ public class EmployeeServiceDAO implements EmployeeDAO{
     }
     
     @Override
-    public void updateEmployeeModule(String score, String employeeID, String name){
+    public void updateEmployeeModule(String score, String employeeID, String name, String moduleID){
         String sql = "update employees_take_modules set scores = ? where employee_id = ? AND module_id = ?";
         try {
-            System.out.println("Update employee module..." + name);
-            int row = jdbcTemplateObject.update(sql, score, employeeID, name);    
+            int row = jdbcTemplateObject.update(sql, score, employeeID, moduleID);    
             System.out.println("* " + row + " row updated.\n");
         } catch(Exception e) {
             System.out.println("EXCEPTION: [ " + e.getMessage() + " ]");

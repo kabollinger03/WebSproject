@@ -11,6 +11,6 @@ public interface EmployeeDAO {
     public ArrayList<Employee> readAllEmployee();
     public ArrayList<Employee> readAllEmployeeFromCol(String col, String str);
     public void updateEmployee(String employeeID, String name, String email, String managerID);
-    public void updateEmployeeModule(String score, String employeeID, String name);
+    public void updateEmployeeModule(String score, String employeeID, String name, String moduleID);
     public void deleteEmployee(String employeeID);
 }
