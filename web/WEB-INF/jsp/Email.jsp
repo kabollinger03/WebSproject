@@ -90,6 +90,17 @@
     
     <jsp:include page="nav.jsp"/>
     
+    <%  String pdfSaved = request.getParameter("pdfSaved");
+        
+        if(pdfSaved != null) { %>
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                The pdf is available for preview at C:/Users/syntel/personal_domain/config
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    <% } %> <!-- end of if -->
+    
     <div class="container-fluid">
         <div class="container mt-2 pt-4 pb-3">
             <nav aria-label="breadcrumb">
@@ -133,9 +144,10 @@
             <table class="table table-bordered table-striped table-sm">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 40%;">Name</th>
-                        <th scope="col" style="width: 40%;">Email</th>
-                        <th scope="col text-center" style="width: 20%;">Send?</th> 
+                        <th scope="col" style="width: 35%;">Name</th>
+                        <th scope="col" style="width: 35%;">Email</th>
+                        <th scope="col" style="width: 10%;" class="text-center">PDF</th>
+                        <th scope="col" style="width: 20%;" class="text-center">Send?</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -144,9 +156,9 @@
                       <tr>
                         <td class="noto">${user.employeeName}</td>
                         <td class="noto">${user.employeeEmail}</td>
-                        <td class="noto"> <!-- link to PDF preview for this employee's report -->
-                            <a href="pdf-preview.htm?empID=${employeeIDs[loop.index]}" target="_blank" rel="noreferrer">
-                                ${employeeIDs[loop.index]}
+                        <td class="noto text-center"> <!-- link to PDF preview for this employee's report -->
+                            <a href="pdf-preview.htm?empID=${employeeIDs[loop.index]}">
+                                <i class="fas fa-file-pdf px-2"></i>
                             </a>
                         </td>
                         <td class="text-center noto"><input class="cb" type="checkbox" name="emailChecked" value="${user.employeeEmail}" /></td>

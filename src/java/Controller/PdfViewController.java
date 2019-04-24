@@ -11,6 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 public class PdfViewController implements Controller {
@@ -33,7 +34,12 @@ public class PdfViewController implements Controller {
             System.err.println("PdfViewController: There was an issue with generating the PDF");
             ex.printStackTrace();
         }
+                
+        RedirectView emailRedirect = new RedirectView("email.htm"); // go back to the same email page        
+        ModelAndView emailHub = new ModelAndView(emailRedirect);
         
-        return new ModelAndView("pdf-preview", "employeeID", employeeID);
+        emailHub.addObject("pdfSaved", "true");
+        
+        return emailHub;
     } 
 }
